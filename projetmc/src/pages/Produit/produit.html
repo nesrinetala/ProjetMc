@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Détails du Produit</title>
+<link rel="stylesheet" href="produit.css">
+</head>
+
+<body>
+
+<div class="product-container">
+    <div class="product-details">
+        <img src="produit1.jpg" alt="Produit" class="product-image">
+        <div class="product-info">
+            <h2 id="product-name">Nom du Produit</h2>
+            <p id="product-description">Description du produit ici...</p>
+            <p class="product-price" id="product-price">Prix : 50€</p>
+            <button onclick="ajouterAuPanier()">Ajouter au panier 🛒</button>
+        </div>
+    </div>
+
+    <h3>Produits recommandés</h3>
+    <div class="recommended-products" id="recommended-products">
+        <!-- Les produits recommandés seront générés ici par JS -->
+    </div>
+</div>
+
+<script src="produit.js"></script>
+</body>
+
+</html>

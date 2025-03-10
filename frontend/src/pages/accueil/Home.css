@@ -1,0 +1,151 @@
+.header {
+    background-color: #f472b6;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .menu li a {
+    transition: color 0.3s ease;
+  }
+
+  .menu li a:hover {
+    color: #fde68a;
+  }
+
+  .banner {
+    background-color: #f9a8d4;
+    text-align: center;
+    padding: 60px 20px;
+    border-radius: 10px; /* Arrondir les coins pour un look plus doux */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.banner h1 {
+    font-size: 36px; /* Augmente la taille du titre */
+    color: #be185d;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif; /* Police plus élégante */
+}
+
+.banner p {
+    font-size: 18px;
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.banner-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.banner-buttons button {
+    background-color: #f472b6;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px; /* Arrondir les coins des boutons */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    font-weight: bold;
+}
+
+.banner-buttons button:hover {
+    background-color: #ec4899;
+    transform: scale(1.05);
+}
+
+.banner-buttons button:first-child {
+    background-color: #fde68a;
+    color: #be185d;
+}
+
+.banner-buttons button:first-child:hover {
+    background-color: #fcd34d;
+}
+
+  .product-card button {
+    background-color: #f472b6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px; /* Ajuste le padding pour un look plus harmonieux */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Espace entre le texte et le bouton */
+    align-self: center; /* Centre le bouton horizontalement */
+}
+
+.product-card button:hover {
+    background-color: #ec4899;
+}
+
+  .product-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .product-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease;
+    padding: 10px; /* Ajoute du padding pour un look plus propre */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pour espacer le bouton du reste */
+}
+
+  .product-card:hover {
+    transform: scale(1.05);
+  }
+
+  .product-card img {
+    width: 100%;
+    height: 230px; /* Garde la même hauteur */
+    object-fit: contain;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    background-color: #fff;
+    padding: 5px;
+}
+
+  .product-card h3 {
+    margin: 10px 0;
+    font-weight: bold;
+  }
+
+  .product-card p {
+    color: #888;
+    margin-bottom: 10px;
+  }
+
+  .product-card button {
+    background-color: #f472b6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 5px;
+  }
+
+  .product-card button:hover {
+    background-color: #ec4899;
+  }
+
+  .popular-products {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #fce7f3;
+  }
+
+  .popular-products h2 {
+    color: #be185d;
+    margin-bottom: 20px;
+  }

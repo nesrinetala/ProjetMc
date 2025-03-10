@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Cosmétiques Beauté</title>
+    <link rel="stylesheet" href="connexion.css">
+</head>
+<body>
+
+    <!-- Menu de navigation -->
+    <header>
+        <nav>
+            <h1>Cosmétiques Beauté</h1>
+            <ul class="menu">
+                <li><a href="../index/index.html" class="text-pink-600 font-semibold">Accueil</a></li>
+                <li><a href="../catalogue/catalogue.html">Catalogue</a></li>
+                <li><a href="../connexion/connexion.html">Connexion</a></li>
+                <li><a href="../inscription/inscription.html">Inscription</a></li>
+                <li><a href="../panier/panier.html">Panier (<span id="cart-count">0</span>)</a></li>
+                <li><a href="../tableau_de_bord/tableau_de_bord.html">Tableau de bord</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Section principale de connexion -->
+    <div class="form-container">
+        <h2>Se connecter</h2>
+
+        <!-- Formulaire de connexion -->
+        <form action="connexion-process.php" method="POST" class="connexion-form">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Mot de passe" required>
+            <button type="submit">Se connecter</button>
+        </form>
+
+        <!-- Lien pour inscription -->
+        <div class="form-links">
+            <p>Pas encore de compte ? <a href="../../inscription/inscription.html">Créer un compte</a></p>
+            <p><a href="../mot-de-passe-oublie/mot-de-passe-oublie.html">Mot de passe oublié ?</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Cosmétiques Beauté. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

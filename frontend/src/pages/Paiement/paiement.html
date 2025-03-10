@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page de Paiement</title>
+<link rel="stylesheet" href="paiement.css">
+</head>
+
+<body>
+
+<div class="payment-container">
+    <h2>Paiement sécurisé 💳</h2>
+    <form id="payment-form">
+        <div class="form-group">
+            <label for="name">Nom complet :</label>
+            <input type="text" id="name" placeholder="Votre nom" required>
+        </div>
+        <div class="form-group">
+            <label for="card-number">Numéro de carte :</label>
+            <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" required>
+        </div>
+        <div class="form-group">
+            <label for="expiry-date">Date d'expiration :</label>
+            <input type="text" id="expiry-date" placeholder="MM/AA" maxlength="5" required>
+        </div>
+        <div class="form-group">
+            <label for="cvv">CVV :</label>
+            <input type="password" id="cvv" placeholder="XXX" maxlength="3" required>
+        </div>
+        <button type="submit">Confirmer le paiement</button>
+        <p id="message"></p>
+    </form>
+</div>
+
+<script src="paiement.js"></script>
+</body>
+
+</html>
