@@ -10,32 +10,32 @@ const Navbar = () => {
       <nav>
         <ul className="navbar-menu">
           <li>
-            <NavLink to="/" exact activeClassName="active">
+            <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>
               Accueil
             </NavLink>
           </li>
           <li>
-            <NavLink to="/Catalogue/Catalogue" activeClassName="active">
+            <NavLink to="/catalogue" className={({ isActive }) => isActive ? "active" : ""}>
               Catalogue
             </NavLink>
           </li>
           <li>
-            <NavLink to="/Connexion/Connexion" activeClassName="active">
+            <NavLink to="/connexion" className={({ isActive }) => isActive ? "active" : ""}>
               Connexion
             </NavLink>
           </li>
           <li>
-            <NavLink to="/Inscription/Inscription" activeClassName="active">
+            <NavLink to="/inscription" className={({ isActive }) => isActive ? "active" : ""}>
               Inscription
             </NavLink>
           </li>
           <li>
-            <NavLink to="/Panier/Panier" activeClassName="active">
+            <NavLink to="/panier" className={({ isActive }) => isActive ? "active" : ""}>
               Panier (<span id="cart-count">0</span>)
             </NavLink>
           </li>
           <li>
-            <NavLink to="/TableauDeBord/TableauDeBord" activeClassName="active">
+            <NavLink to="/tableau_de_bord" className={({ isActive }) => isActive ? "active" : ""}>
               Tableau de bord
             </NavLink>
           </li>

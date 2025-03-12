@@ -1,14 +1,15 @@
 .navbar {
-  background-color: #f472b6; /* Couleur de fond rose */
+  background-color: #809BC4; /* Bleu doux */
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px; /* Coins légèrement arrondis */
 }
 
 .navbar-logo h1 {
-  color: #fff;
+  color: #EDEBFA; /* Blanc cassé pour un meilleur contraste */
   font-family: 'Poppins', sans-serif;
   margin: 0;
   cursor: pointer;
@@ -27,23 +28,28 @@
 
 .navbar-menu a {
   text-decoration: none;
-  color: #fff;
+  color: #F5CFE9; /* Rose doux */
   font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 8px 15px;
+  border-radius: 8px;
   transition: background-color 0.3s, transform 0.3s;
 }
 
 .navbar-menu a:hover {
-  background-color: #ec4899; /* Rose plus foncé au survol */
-  transform: scale(1.05);
+  background-color: #B9B0D6; /* Mauve clair */
+  color: #fff;
+  transform: scale(1.1);
 }
 
 /* Style pour la page active */
 .navbar-menu a.active {
-  background-color: #be185d; /* Rose très foncé pour la page active */
+  background-color: #DCEAF9; /* Bleu pastel */
+  color: #809BC4;
+  font-weight: bold;
 }
 
+/* Style spécifique pour le panier */
 #cart-count {
   font-weight: normal;
+  color: #EDEBFA;
 }

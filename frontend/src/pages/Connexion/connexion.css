@@ -1,21 +1,21 @@
-/* Styles généraux pour la page de connexion */
+/* Styles généraux */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffe4e6; /* Fond rose clair */
+    background-color: #DCEAF9; /* Bleu clair */
 }
 
 /* Menu de navigation */
 header {
-    background-color: #fff;
+    background-color: #EDEBFA; /* Mauve très clair */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 10px 0;
 }
 
 nav {
     display: flex;
-    justify-content: space-between; /* Espace entre le titre et le menu */
+    justify-content: space-between;
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
@@ -23,9 +23,9 @@ nav {
 }
 
 h1 {
-    color: #db2777;
+    color: #809BC4; /* Bleu foncé */
     font-size: 24px;
-    margin: 0; /* Pour que le titre soit bien collé à la gauche */
+    margin: 0;
 }
 
 .menu {
@@ -41,16 +41,17 @@ h1 {
 
 .menu a {
     text-decoration: none;
-    color: #4b5563;
+    color: #809BC4;
     padding: 8px 16px;
     border-radius: 8px;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .menu a:hover {
-    background-color: #db2777; /* Fond rose foncé au survol */
-    color: #fff; /* Texte blanc au survol */
+    background-color: #B9B0D6; /* Mauve moyen */
+    color: #fff;
 }
+
 /* Formulaire de connexion */
 .form-container {
     max-width: 400px;
@@ -61,15 +62,15 @@ h1 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Titre de la page */
+/* Titre */
 h2 {
     text-align: center;
-    color: #db2777;
+    color: #809BC4;
     font-size: 28px;
     margin-bottom: 20px;
 }
 
-/* Formulaire de connexion */
+/* Formulaire */
 form {
     display: flex;
     flex-direction: column;
@@ -89,27 +90,25 @@ button {
     padding: 12px;
     border: none;
     border-radius: 8px;
-    background-color: #db2777;
+    background-color: #B9B0D6;
     color: #fff;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
 }
 
-/* Hover sur bouton */
 button:hover {
-    background-color: #a84e78;
+    background-color: #809BC4;
 }
 
-/* Lien vers la page d'inscription */
+/* Liens */
 a {
     text-decoration: none;
-    color: #db2777;
+    color: #809BC4;
     text-align: center;
     font-size: 14px;
 }
 
-/* Espacement entre les sections de formulaire */
 .form-links {
     text-align: center;
     margin-top: 10px;
@@ -118,7 +117,7 @@ a {
 /* Footer */
 footer {
     text-align: center;
-    background-color: #fff;
+    background-color: #EDEBFA;
     padding: 10px 0;
     position: fixed;
     width: 100%;
