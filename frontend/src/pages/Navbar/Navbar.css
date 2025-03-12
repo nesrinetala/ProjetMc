@@ -5,8 +5,18 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 10px; /* Coins légèrement arrondis */
+  position: fixed; /* Fixe la navbar en haut */
+  top: 0; /* La colle au plafond */
+  left: 0;
+  width: 100%; /* Prend toute la largeur */
+  z-index: 1000; /* S'assure qu'elle reste au-dessus du reste */
+  border-radius: 0; /* Supprime les coins arrondis pour bien s'aligner */
 }
+
+main {
+  margin-top: 60px; /* Pour éviter que le contenu soit caché sous la navbar */
+}
+
 
 .navbar-logo h1 {
   color: #EDEBFA; /* Blanc cassé pour un meilleur contraste */

@@ -47,6 +47,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <footer>
+        <p>&copy; 2025 Mon Site - Tous droits réservés</p>
+      </footer>
     </div>
   );
 };

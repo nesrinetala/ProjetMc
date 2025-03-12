@@ -1,236 +1,337 @@
-/* Style global */
+/* 🌟 Arrière-plan général */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Conteneur principal */
-  .container {
-    max-width: 1100px;
-    margin: 20px auto;
-    padding: 20px;
-    background: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-  
-  /* Titres */
-  h2 {
-    color: #333;
-    margin-bottom: 15px;
-  }
-  
-  /* Bouton principal */
-  .button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background 0.3s ease;
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
-  
-  .add-button {
-    margin-bottom: 15px;
-  }
-  
-  /* --- 📌 SECTION MES PRODUITS --- */
-  .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-  }
-  
-  .card {
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .card h3 {
-    margin: 0;
-    color: #333;
-  }
-  
-  .card-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  
-  .card-actions .button {
-    flex: 1;
-    margin: 0 3px;
-  }
-  
-  /* --- 📌 TABLE COMMANDES --- */
-  .commandes-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  
-  .commandes-table th,
-  .commandes-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  .commandes-table th {
-    background: #007bff;
-    color: white;
-  }
-  
-  /* --- 📌 STATUT COMMANDES --- */
-  .statut {
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-  
-  .attente {
-    background: #ffcc00;
-    color: #333;
-  }
-  
-  .expedie {
-    background: #28a745;
-    color: white;
-  }
-  
-  /* --- 📌 MODAL --- */
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 300px;
-    text-align: center;
-  }
-  
-  .modal input,
-  .modal textarea {
-    width: 100%;
-    margin: 5px 0;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .close {
-    font-size: 22px;
-    font-weight: bold;
-    cursor: pointer;
-    float: right;
-  }
-  
-  /* --- 📌 FOOTER --- */
-  footer {
-    text-align: center;
-    padding: 15px;
-    background: #333;
-    color: white;
-    margin-top: 20px;
-    border-radius: 0 0 8px 8px;
-  }
-  
+  font-family: Arial, sans-serif;
+  background-color: #ffffff; /* Bleu clair au lieu de rose */
+  margin: 0;
+  padding: 20px;
+}
 
-  /* Ajustements pour la statistique */
-.stat-card {
-    width: 200px;
-    height: 200px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .progress-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    font-family: Arial, sans-serif;
-  }
-  
-  .progress-text h2 {
-    font-size: 23px;
-    font-weight: bold;
-    margin: 0;
-  }
-  
-  .progress-text p {
-    font-size: 14px;
-    color: #555;
-    max-width: 100%;
-    margin-top: 5px;
-  }
-  
-  /* Conteneur des statistiques */
+/* 🌟 Section Mes Produits */
+.products-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+}
+
+.products-section h2 {
+  color: #B9B0D6;
+  text-align: center;
+}
+
+/* 🌟 Bouton Ajouter */
+.add-button {
+  background-color: #F5CFE9;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: block;
+  margin: 10px auto;
+}
+
+.add-button:hover {
+  background-color: #B9B0D6;
+}
+
+/* 🌟 Conteneur des cartes */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* 🌟 Cartes Produits */
+.card {
+  background-color: #ffffff;
+  border: 2px solid #B9B0D6;
+  padding: 15px;
+  border-radius: 12px;
+  width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+  color: #809BC4;
+  font-size: 18px;
+}
+
+.card p {
+  color: #555;
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.card strong {
+  color: #333;
+}
+
+/* 🌟 Boutons des cartes */
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.card-actions .button {
+  background-color: #809BC4;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.card-actions .button:hover {
+  background-color: #B9B0D6;
+}
+
+/* 🌟 Section Commandes */
+.orders-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 45px;
+}
+
+.orders-section h2 {
+  color: #809BC4;
+  text-align: center;
+}
+
+/* 🌟 Table Commandes */
+.commandes-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.commandes-table th, 
+.commandes-table td {
+  border: 1px solid #B9B0D6;
+  padding: 10px;
+  text-align: left;
+}
+
+.commandes-table th {
+  background-color: #DCEAF9;
+  color: #809BC4;
+}
+
+/* 🌟 Statuts des commandes */
+.statut {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.statut.attente {
+  background-color: #F5CFE9;
+  color: #B9B0D6;
+}
+
+.statut.expedie {
+  background-color: #DCEAF9;
+  color: #809BC4;
+}
+
+
+ /* Ajustements pour la statistique */
+ .stat-card {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  border: 5px solid transparent;
+  background-clip: padding-box;
+}
+
+.stat-card::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #809BC4, #B9B0D6);
+  z-index: -1;
+}
+
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.progress-text h2 {
+  font-size: 23px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.progress-text p {
+  font-size: 14px;
+  color: #555;
+  max-width: 100%;
+  margin-top: 5px;
+}
+
+/* Conteneur des statistiques */
 .stats-container {
-    display: flex;
-    justify-content: center; /* Centre les statistiques horizontalement */
-    gap: 30px; /* Espacement entre les cercles */
-    flex-wrap: nowrap; /* Empêche le retour à la ligne */
-    margin-top: 20px;
+  display: flex;
+  justify-content: center; /* Centre les statistiques horizontalement */
+  gap: 30px; /* Espacement entre les cercles */
+  flex-wrap: nowrap; /* Empêche le retour à la ligne */
+  margin-top: 20px;
+  padding-bottom: 50px;
 }
 
 /* Style des cartes de statistiques */
 .stat-card {
-    width: 200px;
-    height: 200px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%; /* Rend les cartes parfaitement rondes */
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  height: 200px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%; /* Rend les cartes parfaitement rondes */
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Texte au centre des cercles */
 .progress-text {
-    position: absolute;
-    text-align: center;
-    font-family: Arial, sans-serif;
+  position: absolute;
+  text-align: center;
+  font-family: Arial, sans-serif;
 }
 
 .progress-text h2 {
-    font-size: 23px;
-    font-weight: bold;
-    margin: 0;
+  font-size: 23px;
+  font-weight: bold;
+  margin: 0;
 }
 
 .progress-text p {
-    font-size: 14px;
-    color: #555;
-    max-width: 100%;
-    margin-top: 5px;
+  font-size: 14px;
+  color: #555;
+  max-width: 100%;
+  margin-top: 5px;
+}
+
+.product-image {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.product-image img {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  border-radius: 8px;
+}
+
+
+/* Style du bouton Ajouter un Produit */
+.add-button {
+  background-color: #809BC4;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.add-button:hover {
+  background-color: #5a7ba3;
+}
+
+/* Style du modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Contenu du modal */
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Bouton fermer */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: red;
+}
+
+/* Style du formulaire */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.button {
+  background-color: #F5CFE9;
+  color: #333;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background-color: #e3b6d4;
 }

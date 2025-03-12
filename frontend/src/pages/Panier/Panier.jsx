@@ -92,6 +92,9 @@ const Panier = () => {
         </div>
       </main>
     </div>
+    <footer>
+        <p>&copy; 2025 Mon Site - Tous droits réservés</p>
+      </footer>
     </div>
   );
 };

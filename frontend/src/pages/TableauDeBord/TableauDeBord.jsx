@@ -80,6 +80,25 @@ export default function TableauDeBord() {
     { percentage: 92, color: "#7BB8D9", label: "Commandes expédiées", description: "230 livrées" },
   ];
 
+  const products = [
+    {
+      id: 1,
+      name: "Produit 1",
+      description: "Description du produit 1...",
+      price: "20€",
+      stock: "8",
+      image: "/images/produit1.jpg",
+    },
+    {
+      id: 2,
+      name: "Produit 2",
+      description: "Description du produit 2...",
+      price: "30€",
+      stock: "5",
+      image: "/images/produit2.jpg",
+    },
+  ];
+
   return (
     <div className="dashboard-container">
       <Navbar />
@@ -93,22 +112,30 @@ export default function TableauDeBord() {
           </div>
         </section>
 
-        <section>
-          <h2 style={{ color: "#B9B0D6" }}>Mes Produits</h2>
-          <button className="button add-button" onClick={openModal} style={{ backgroundColor: "#F5CFE9" }}>
+        <section className="products-section">
+          <h2 style={{ color: "#809BC4" }}>Mes Produits</h2>
+          <button className="button add-button" onClick={openModal}>
             + Ajouter un produit
           </button>
           <div className="cards-container">
-            {[1, 2].map((id) => (
-              <div className="card" key={id} style={{ backgroundColor: "#DCEAF9" }}>
-                <h3>Nom du Produit {id}</h3>
-                <p>Description brève du produit ici...</p>
+            {products.map((product) => (
+              <div className="card" key={product.id}>
+                {/* Image du produit */}
+                <div className="product-image">
+                  <img src={product.image} alt={product.name} />
+                </div>
+
+                {/* Infos du produit */}
+                <h3>{product.name}</h3>
+                <p>{product.description}</p>
                 <p>
-                  <strong>Prix :</strong> {id * 15 + 5}€
+                  <strong>Prix :</strong> {product.price}
                 </p>
                 <p>
-                  <strong>Stock :</strong> {10 - id} unités
+                  <strong>Stock :</strong> {product.stock} unités
                 </p>
+
+                {/* Actions sur le produit */}
                 <div className="card-actions">
                   <button className="button">Voir Détails</button>
                   <button className="button">Modifier</button>
@@ -119,8 +146,8 @@ export default function TableauDeBord() {
           </div>
         </section>
 
-        <section>
-          <h2 style={{ color: "#EDEBFA" }}>Commandes Reçues</h2>
+        <section className="orders-section">
+          <h2>Commandes Reçues</h2>
           <table className="commandes-table">
             <thead>
               <tr>

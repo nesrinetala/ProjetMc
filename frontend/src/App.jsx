@@ -6,6 +6,7 @@ import Connexion from './pages/Connexion/Connexion';
 import Inscription from './pages/Inscription/Inscription';
 import Panier from './pages/Panier/Panier';
 import TableauDeBord from './pages/TableauDeBord/TableauDeBord';
+import ProductDetails from './pages/productDetails/productDetails';
 
 function Layout() {
   const location = useLocation();
@@ -22,6 +23,7 @@ function Layout() {
         <Route path="/panier" element={<Panier />} />
         <Route path="/tableau_de_bord" element={<TableauDeBord />} />
         <Route path="/header" element={<Header />} />
+        <Route path="/productdetails" element={<ProductDetails />} />
       </Routes>
     </div>
   );

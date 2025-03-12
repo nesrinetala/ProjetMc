@@ -1,0 +1,102 @@
+.product-details {
+    width: 80%;
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Note moyenne */
+.average-rating {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.stars {
+    font-size: 20px;
+    color: #FFD700;
+    margin-left: 8px;
+}
+
+/* Liste des commentaires */
+.comments {
+    margin-top: 20px;
+}
+
+.comment {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.comment strong {
+    color: #555;
+}
+
+.comment p {
+    margin: 5px 0;
+}
+
+/* Section pour ajouter un commentaire */
+.add-comment {
+    margin-top: 20px;
+}
+
+.add-comment textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: none;
+}
+
+.rating {
+    margin-top: 10px;
+}
+
+.rating button {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #FFD700;
+}
+
+.rating button.selected {
+    font-weight: bold;
+}
+
+/* Bouton publier */
+.add-comment button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #5B7DA3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.add-comment button:hover {
+    background: #4A6A89;
+}
+
+/* Message pour se connecter */
+.login-message {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-message a {
+    color: #5B7DA3;
+    text-decoration: none;
+}
+
+.login-message a:hover {
+    text-decoration: underline;
+}
