@@ -1,0 +1,162 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #DCEAF9; /* Fond doux et clair */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* HEADER */
+.header {
+    background-color: #809BC4; /* Bleu doux */
+    padding: 15px 0;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    color: #F5CFE9; /* Rose pastel */
+    margin: 0;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 0;
+}
+
+.menu li {
+    margin: 0;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #EDEBFA; /* Blanc légèrement violet */
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.menu a:hover {
+    background-color: #B9B0D6; /* Mauve */
+    color: #fff;
+}
+
+/* PANIER */
+.panier {
+    background: #EDEBFA; /* Fond léger */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #809BC4; /* Bleu pastel */
+}
+
+/* TABLEAU */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #DCEAF9;
+    text-align: center;
+}
+
+th {
+    background-color: #F5CFE9; /* Rose pastel */
+    color: #809BC4; /* Bleu doux */
+}
+
+/* IMAGE DES PRODUITS */
+.produit-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #B9B0D6;
+}
+
+/* INPUT QUANTITÉ */
+td input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #B9B0D6;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #EDEBFA;
+    color: #809BC4;
+}
+
+/* BOUTON SUPPRIMER */
+td button {
+    background-color: #F5CFE9;
+    color: #809BC4;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+td button:hover {
+    background-color: #B9B0D6;
+    color: white;
+}
+
+/* TOTAL */
+.total-section {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.total-section p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #809BC4;
+}
+
+/* BOUTONS */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.buttons a {
+    color: #809BC4;
+    text-decoration: none;
+}
+
+.buttons a:hover {
+    color: #B9B0D6;
+}
+
+.checkout {
+    background-color: #809BC4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.checkout:hover {
+    background-color: #B9B0D6;
+}

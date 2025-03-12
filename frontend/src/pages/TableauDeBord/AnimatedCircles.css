@@ -1,0 +1,52 @@
+.circle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .stat-circle {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .circle-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 10px solid #e0e0e0;
+  }
+  
+  .circle-fill {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    clip: rect(0, 150px, 150px, 75px);
+  }
+  
+  .circle-content {
+    position: absolute;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    width: 80%;
+  }
+  
+  .circle-description {
+    position: absolute;
+    bottom: -30px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    width: 100%;
+  }
+  
