@@ -38,7 +38,7 @@ const Panier = () => {
   );
 
   return (
-    <div>
+    <div className="page-pannier">
         <Navbar/>
     <div className="container">
       <main className="panier">
@@ -86,8 +86,8 @@ const Panier = () => {
         <div className="total-section">
           <p>Total : <span className="total-general">{totalGeneral}€</span></p>
           <div className="buttons">
-            <a href="/catalogue">← Continuer mes achats</a>
-            <button className="checkout">Passer à la caisse</button>
+          <a href="/catalogue" className="btn-retour">← Continuer mes achats</a>
+            <button className="btn-checkout">Passer à la caisse</button>
           </div>
         </div>
       </main>

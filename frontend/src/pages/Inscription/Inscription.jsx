@@ -8,11 +8,7 @@ const Inscription = () => {
       <div className="inscription-content">
         {/* Section gauche avec l'image et le texte superposé */}
         <div className="image-section">
-          <img src="/images/bb.jpg" alt="Bienvenue chez Cosmétiques Beauté" />
-          <div className="overlay-text">
-            <h2>Rejoignez-nous dès aujourd’hui !</h2>
-            <p>Créez un compte pour acheter et vendre vos produits de beauté.</p>
-          </div>
+          <img src="/images/cnxhht.png" alt="Bienvenue chez Cosmétiques Beauté" />
         </div>
 
         {/* Section droite avec le formulaire */}

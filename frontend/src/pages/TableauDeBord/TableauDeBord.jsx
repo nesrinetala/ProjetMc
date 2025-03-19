@@ -33,11 +33,11 @@ const AnimatedCircle = ({ percentage, color, label, description }) => {
     <div className="stat-card">
       <div className="progress-container">
         <svg width="180" height="180" viewBox="0 0 120 120" id={label}>
-          <circle cx="60" cy="60" r="57" stroke="#DCEAF9" strokeWidth="6" fill="none" />
+          <circle cx="60" cy="60" r="56" stroke="#cecece" strokeWidth="6" fill="none" />
           <motion.circle
             cx="60"
             cy="60"
-            r="57"
+            r="56"
             stroke={color}
             strokeWidth="6"
             fill="none"
@@ -69,15 +69,23 @@ AnimatedCircle.propTypes = {
 
 export default function TableauDeBord() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [productImage, setProductImage] = useState(null); // Déclaration ici dans le composant
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0]; // Récupère le fichier sélectionné
+    if (file) {
+      setProductImage(URL.createObjectURL(file)); // Crée une URL temporaire pour afficher l'image
+    }
+  };
+
   const stats = [
-    { percentage: 100, color: "#809BC4", label: "Total des ventes", description: "250 ventes réalisées" },
-    { percentage: 100, color: "#B9B0D6", label: "Revenus générés", description: "1 500 000 DA gagnés" },
-    { percentage: 15, color: "#F5CFE9", label: "Commandes en attente", description: "15 en attente" },
-    { percentage: 92, color: "#7BB8D9", label: "Commandes expédiées", description: "230 livrées" },
+    { percentage: 100, color: "#ffc107", label: "Total des ventes", description: "250 ventes réalisées" },
+    { percentage: 100, color: "#377dff", label: "Revenus générés", description: "1 500 000 DA gagnés" },
+    { percentage: 15, color: "#de4437", label: "Commandes en attente", description: "15 en attente" },
+    { percentage: 92, color: "#00c9a7", label: "Commandes expédiées", description: "230 livrées" },
   ];
 
   const products = [
@@ -97,14 +105,62 @@ export default function TableauDeBord() {
       stock: "5",
       image: "/images/produit2.jpg",
     },
+    {
+      id: 3,
+      name: "Produit 3",
+      description: "Description du produit 1...",
+      price: "20€",
+      stock: "8",
+      image: "/images/produit3.jpg",
+    },
+    {
+      id: 4,
+      name: "Produit 4",
+      description: "Description du produit 2...",
+      price: "30€",
+      stock: "5",
+      image: "/images/produit4.jpg",
+    },
+    {
+      id: 5,
+      name: "Produit 5",
+      description: "Description du produit 2...",
+      price: "30€",
+      stock: "5",
+      image: "/images/produit4.jpg",
+    },
+    {
+      id: 6,
+      name: "Produit 6",
+      description: "Description du produit 2...",
+      price: "30€",
+      stock: "5",
+      image: "/images/produit4.jpg",
+    },
+    {
+      id: 7,
+      name: "Produit 7",
+      description: "Description du produit 2...",
+      price: "30€",
+      stock: "5",
+      image: "/images/produit4.jpg",
+    },
+    {
+      id: 8,
+      name: "Produit 8",
+      description: "Description du produit 2...",
+      price: "30€",
+      stock: "5",
+      image: "/images/produit4.jpg",
+    },
   ];
 
   return (
     <div className="dashboard-container">
       <Navbar />
       <main className="container">
-        <section>
-          <h2 style={{ color: "#809BC4" }}>Statistiques</h2>
+        <section className="espace">
+          <h2 style={{ color: "#D5C7BC" }}>Statistiques</h2>
           <div className="stats-container">
             {stats.map((stat, index) => (
               <AnimatedCircle key={index} {...stat} />
@@ -113,7 +169,7 @@ export default function TableauDeBord() {
         </section>
 
         <section className="products-section">
-          <h2 style={{ color: "#809BC4" }}>Mes Produits</h2>
+          <h2 style={{ color: "#000" }}>Mes Produits</h2>
           <button className="button add-button" onClick={openModal}>
             + Ajouter un produit
           </button>
@@ -184,27 +240,75 @@ export default function TableauDeBord() {
 
       {modalOpen && (
         <div className="modal">
-          <div className="modal-content" style={{ backgroundColor: "#DCEAF9" }}>
-            <span className="close" onClick={closeModal}>
+          <div className="modal-content" style={{ backgroundColor: "var(--blanc-casse)" }}>
+            <span className="close" onClick={closeModal} style={{ color: "var(--noir)", fontSize: "28px" }}>
               &times;
             </span>
-            <h2>Ajouter un Produit</h2>
+            <h2 style={{ color: "var(--noir)" }}>Ajouter un Produit</h2>
             <form>
-              <input type="text" placeholder="Nom du produit" required />
-              <input type="number" placeholder="Prix" required />
-              <input type="number" placeholder="Stock" required />
-              <textarea placeholder="Description" required></textarea>
-              <button type="submit" className="button" style={{ backgroundColor: "#F5CFE9" }}>
+              <input
+                type="text"
+                placeholder="Nom du produit"
+                required
+                style={{
+                  border: "1px solid var(--gris-anthracite)",
+                  padding: "10px",
+                  borderRadius: "5px",
+                  marginBottom: "10px",
+                  backgroundColor: "var(--blanc-pur)",
+                  color: "var(--noir)",
+                }}
+              />
+              <input
+                type="number"
+                placeholder="Prix"
+                required
+                style={{
+                  border: "1px solid var(--gris-anthracite)",
+                  padding: "10px",
+                  borderRadius: "5px",
+                  marginBottom: "10px",
+                  backgroundColor: "var(--blanc-pur)",
+                  color: "var(--noir)",
+                }}
+              />
+              <input
+                type="number"
+                placeholder="Stock"
+                required
+                style={{
+                  border: "1px solid var(--gris-anthracite)",
+                  padding: "10px",
+                  borderRadius: "5px",
+                  marginBottom: "10px",
+                  backgroundColor: "var(--blanc-pur)",
+                  color: "var(--noir)",
+                }}
+              />
+              <textarea
+                placeholder="Description"
+                required
+                style={{
+                  border: "1px solid var(--gris-anthracite)",
+                  padding: "10px",
+                  borderRadius: "5px",
+                  backgroundColor: "var(--blanc-pur)",
+                  color: "var(--noir)",
+                }}
+              ></textarea>
+              <input type="file" onChange={handleImageChange} />
+              {productImage && (
+                <div className="product-image-preview">
+                  <img src={productImage} alt="Preview" width="100%" />
+                </div>
+              )}
+              <button className="button" style={{ marginTop: "20px" }} type="submit">
                 Ajouter
               </button>
             </form>
           </div>
         </div>
       )}
-
-      <footer>
-        <p>&copy; 2025 Mon Site - Tous droits réservés</p>
-      </footer>
     </div>
   );
 }

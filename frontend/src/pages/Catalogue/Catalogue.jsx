@@ -6,10 +6,12 @@ const products = [
   { id: 1, name: "Crème Hydratante", category: "cheveux", price: 20, image: "/images/produit1.jpg" },
   { id: 2, name: "Crème Hydratante", category: "peau", price: 20, image: "/images/produit2.jpg" },
   { id: 3, name: "Crème Hydratante", category: "maquillage", price: 20, image: "/images/produit3.jpg" },
-  { id: 4, name: "Crème Hydratante", category: "cheveux", price: 20, image: "/images/produit4.jpg" }
+  { id: 4, name: "Crème Hydratante", category: "cheveux", price: 20, image: "/images/produit4.jpg" },
+  { id: 5, name: "Crème Hydratante", category: "hh", price: 20, image: "/images/aaa.jpg" },
+  { id: 6, name: "Crème Hydratante", category: "hhh", price: 20, image: "/images/bbb.jpg" }
 ];
 
-export default function App() {
+export default function Catalogue() {
   const [searchText, setSearchText] = useState("");
   const [category, setCategory] = useState("");
   const [priceFilter, setPriceFilter] = useState("");

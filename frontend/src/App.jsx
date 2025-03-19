@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/accueil/Home";
 import Header from './pages/Header';
@@ -11,10 +12,16 @@ import ProductDetails from './pages/productDetails/productDetails';
 function Layout() {
   const location = useLocation();
   console.log(location);
+
+  useEffect(() => {
+    document.body.style.margin = "0";
+    document.body.style.padding = "0";
+    document.documentElement.style.margin = "0";
+    document.documentElement.style.padding = "0";
+  }, []);
   
   return (
-    <div>
-
+    <div style={{ width: "100%", minHeight: "100vh" }}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/catalogue" element={<Catalogue />} />

@@ -1,81 +1,101 @@
+/* 🌟 Variables de Couleurs */
+:root {
+  --noir: #000000;
+  --noir-profond: #181818;
+  --gris-anthracite: #3D3D3D;
+  --beige-doux: #e6dcd4;
+  --blanc-casse: #F0EDE5;
+  --taupe-fonce: #6E5E52;
+  --doré: #D4AF37; /* Couleur dorée */
+  --hover-color: #5C4C42; /* Plus foncé que taupe-foncé pour le hover */
+}
+
 /* 🌟 Arrière-plan général */
 body {
   font-family: Arial, sans-serif;
-  background-color: #ffffff; /* Bleu clair au lieu de rose */
+  background-color: var(--noir-profond);
   margin: 0;
   padding: 20px;
+  color: var(--blanc-casse);
 }
 
-/* 🌟 Section Mes Produits */
+/* 🌟 Section Produits */
 .products-section {
-  background-color: white;
+  background-color: var(--beige-doux);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 40px;
+  border: 2px solid var(--doré); /* Bordure dorée */
 }
 
 .products-section h2 {
-  color: #B9B0D6;
+  color: var(--noir);
   text-align: center;
 }
 
 /* 🌟 Bouton Ajouter */
 .add-button {
-  background-color: #F5CFE9;
-  color: white;
-  border: none;
+  background-color: var(--taupe-fonce);
+  color: var(--blanc-casse);
+  border: 2px solid var(--doré); /* Bordure dorée */
   padding: 12px 18px;
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px;
   display: block;
   margin: 10px auto;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .add-button:hover {
-  background-color: #B9B0D6;
+  background-color: var(--doré);
+  color: var(--noir); /* Texte noir quand hover */
+  transform: scale(1.05);
 }
 
 /* 🌟 Conteneur des cartes */
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
+  .cards-container {
+    display: flex;
+    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Crée 4 colonnes égales */
+    gap: 20px; /* Espace entre les cartes */
+    margin-top: 20px;
 }
+
 
 /* 🌟 Cartes Produits */
 .card {
-  background-color: #ffffff;
-  border: 2px solid #B9B0D6;
+  background-color: var(--blanc-casse);
+  border: 2px solid var(--taupe-fonce);
   padding: 15px;
   border-radius: 12px;
-  width: 250px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px;
 }
 
 .card:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  border-color: var(--doré); /* Bordure dorée au survol */
 }
 
 .card h3 {
-  color: #809BC4;
+  color: var(--noir);
   font-size: 18px;
 }
 
 .card p {
-  color: #555;
+  color: var(--gris-anthracite);
   font-size: 14px;
   margin: 8px 0;
 }
 
 .card strong {
-  color: #333;
+  color: var(--doré); /* Texte doré */
 }
 
 /* 🌟 Boutons des cartes */
@@ -86,31 +106,34 @@ body {
 }
 
 .card-actions .button {
-  background-color: #809BC4;
-  color: white;
-  border: none;
+  background-color: var(--taupe-fonce);
+  color: var(--blanc-casse);
+  border: 2px solid var(--doré); /* Bordure dorée */
   padding: 6px 10px;
   cursor: pointer;
   border-radius: 5px;
   font-size: 14px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .card-actions .button:hover {
-  background-color: #B9B0D6;
+  background-color: var(--doré);
+  color: var(--noir); /* Texte noir au survol */
+  transform: scale(1.05);
 }
 
 /* 🌟 Section Commandes */
 .orders-section {
-  background-color: white;
+  background-color: var(--beige-doux);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 45px;
+  border: 2px solid var(--doré); /* Bordure dorée */
 }
 
 .orders-section h2 {
-  color: #809BC4;
+  color: var(--noir);
   text-align: center;
 }
 
@@ -123,14 +146,14 @@ body {
 
 .commandes-table th, 
 .commandes-table td {
-  border: 1px solid #B9B0D6;
+  border: 1px solid var(--gris-anthracite);
   padding: 10px;
   text-align: left;
 }
 
 .commandes-table th {
-  background-color: #DCEAF9;
-  color: #809BC4;
+  background-color: var(--gris-anthracite);
+  color: var(--blanc-casse);
 }
 
 /* 🌟 Statuts des commandes */
@@ -141,18 +164,17 @@ body {
 }
 
 .statut.attente {
-  background-color: #F5CFE9;
-  color: #B9B0D6;
+  background-color: var(--taupe-fonce);
+  color: var(--blanc-casse);
 }
 
 .statut.expedie {
-  background-color: #DCEAF9;
-  color: #809BC4;
+  background-color: var(--doré);
+  color: var(--noir);
 }
 
-
- /* Ajustements pour la statistique */
- .stat-card {
+/* 🌟 Statistiques - Cartes circulaires */
+.stat-card {
   width: 200px;
   height: 200px;
   position: relative;
@@ -160,7 +182,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: white;
+  background: var(--blanc-casse);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   border: 5px solid transparent;
   background-clip: padding-box;
@@ -174,10 +196,9 @@ body {
   right: -5px;
   bottom: -5px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #809BC4, #B9B0D6);
+  background: linear-gradient(135deg, var(--taupe-fonce), var(--doré));
   z-index: -1;
 }
-
 
 .progress-text {
   position: absolute;
@@ -186,64 +207,33 @@ body {
   transform: translate(-50%, -50%);
   text-align: center;
   font-family: Arial, sans-serif;
+  color: var(--noir);
 }
 
 .progress-text h2 {
   font-size: 23px;
   font-weight: bold;
   margin: 0;
+  color: rgba(74, 63, 53, 0.9);;
 }
 
 .progress-text p {
   font-size: 14px;
-  color: #555;
-  max-width: 100%;
+  color: var(--gris-anthracite);
   margin-top: 5px;
 }
 
 /* Conteneur des statistiques */
 .stats-container {
   display: flex;
-  justify-content: center; /* Centre les statistiques horizontalement */
-  gap: 30px; /* Espacement entre les cercles */
-  flex-wrap: nowrap; /* Empêche le retour à la ligne */
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: nowrap;
   margin-top: 20px;
   padding-bottom: 50px;
 }
 
-/* Style des cartes de statistiques */
-.stat-card {
-  width: 200px;
-  height: 200px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%; /* Rend les cartes parfaitement rondes */
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Texte au centre des cercles */
-.progress-text {
-  position: absolute;
-  text-align: center;
-  font-family: Arial, sans-serif;
-}
-
-.progress-text h2 {
-  font-size: 23px;
-  font-weight: bold;
-  margin: 0;
-}
-
-.progress-text p {
-  font-size: 14px;
-  color: #555;
-  max-width: 100%;
-  margin-top: 5px;
-}
-
+/* 🌟 Image du produit */
 .product-image {
   text-align: center;
   margin-bottom: 10px;
@@ -256,24 +246,7 @@ body {
   border-radius: 8px;
 }
 
-
-/* Style du bouton Ajouter un Produit */
-.add-button {
-  background-color: #809BC4;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: 0.3s;
-}
-
-.add-button:hover {
-  background-color: #5a7ba3;
-}
-
-/* Style du modal */
+/* 🌟 Modal */
 .modal {
   position: fixed;
   top: 0;
@@ -289,13 +262,15 @@ body {
 
 /* Contenu du modal */
 .modal-content {
-  background: white;
+  background: var(--blanc-casse);
   padding: 20px;
   border-radius: 8px;
   width: 400px;
   text-align: center;
   position: relative;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  max-height: 500px; /* Limite la hauteur du modal */
+  overflow-y: auto; /* Ajoute un défilement vertical si nécessaire */
 }
 
 /* Bouton fermer */
@@ -308,7 +283,7 @@ body {
   color: red;
 }
 
-/* Style du formulaire */
+/* Formulaire */
 form {
   display: flex;
   flex-direction: column;
@@ -318,13 +293,14 @@ form {
 input, textarea {
   width: 100%;
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--gris-anthracite);
   border-radius: 5px;
 }
 
+/* 🌟 Bouton Modal */
 .button {
-  background-color: #F5CFE9;
-  color: #333;
+  background-color: var(--beige-doux);
+  color: var(--noir);
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -333,5 +309,17 @@ input, textarea {
 }
 
 .button:hover {
-  background-color: #e3b6d4;
+  background-color: var(--doré);
+  color: var(--noir);
+}
+
+/* Focus et Accessibilité */
+.add-button:focus,
+.card-actions .button:focus {
+  outline: 2px solid var(--doré);
+  outline-offset: 4px;
+}
+
+.espace{
+  margin-top: 90px;
 }

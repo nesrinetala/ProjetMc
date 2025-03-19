@@ -1,8 +1,33 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
   text-align: center;
+  background-color: #FFDFC3; /* Beige clair */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px; /* Ajuste selon la largeur que tu veux */
+  margin: 0 auto; /* Centre le conteneur */
+  text-align: center;
+  background-color: #181818;
+  border-radius: 10px;
+  margin-top: 20px; /* Avant c'était 800px, maintenant ajusté */
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%; /* Prend toute la largeur */
+  z-index: 1000;
+  background-color: #fff;
 }
 
 .logo {
@@ -11,11 +36,13 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #FEA38E); /* Orange saumon */
 }
+
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #F3B5A0); /* Rose pâle */
 }
 
 @keyframes logo-spin {
@@ -35,8 +62,11 @@
 
 .card {
   padding: 2em;
+  background-color: #F6E6D0; /* Crème */
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .read-the-docs {
-  color: #888;
+  color: #F3B5A0; /* Rose pâle */
 }

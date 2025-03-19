@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { FaTimes } from "react-icons/fa"; // Importer une icône de fermeture
 import Navbar from "../Navbar/Navbar";
@@ -7,16 +8,12 @@ const Connexion = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="inscription-container">
+    <div className="connexion-container">
       <Navbar />
-      <div className="inscription-content">
+      <div className="connexion-content">
         {/* Section gauche avec l'image et le texte superposé */}
         <div className="image-section">
-          <img src="/images/cnx.jpg" alt="Bienvenue chez Cosmétiques Beauté" />
-          <div className="overlay-text">
-            <h2>Connectez-vous pour accéder à votre espace</h2>
-            <p>Gérez vos achats et vos ventes facilement.</p>
-          </div>
+          <img src="/images/nyah.png" alt="Bienvenue chez Cosmétiques Beauté" />
         </div>
 
         {/* Section droite avec le formulaire */}
@@ -28,7 +25,7 @@ const Connexion = () => {
             <button type="submit">Se connecter</button>
           </form>
           <div className="form-links">
-            <p>Pas encore de compte ? <a href="./Inscription">Créer un compte</a></p>
+          <p>Pas encore de compte ? <Link to="/Inscription">Créer un compte</Link></p>
             <p>
               <a className="forgot-password-btn" onClick={() => setShowModal(true)}>Mot de passe oublié ?</a>
             </p>

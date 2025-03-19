@@ -1,0 +1,30 @@
+.container {
+    margin-top: 50px;
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: auto;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .u-slick .slick-prev, .u-slick .slick-next {
+    background-color: #007bff;
+    border-radius: 50%;
+  }
+  
+  .u-slick__pagination {
+    margin-top: 20px;
+  }
+  
+  .slick-prev {
+    left: -35px;
+  }
+  
+  .slick-next {
+    right: -35px;
+  }
+  

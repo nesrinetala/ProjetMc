@@ -1,135 +1,145 @@
 /* Styles généraux */
 .container {
-    width: 80%;
-    margin: auto;
-    text-align: center;
-    background-color: #EDEBFA; /* Fond blanc cassé */
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  /* Section de filtre */
-  .filter-section {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 20px 0;
-  }
-  
-  .filter-button {
-    padding: 10px 15px;
-    border: none;
-    background-color: #809BC4; /* Bleu foncé */
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-  
-  .filter-button:hover {
-    background-color: #B9B0D6; /* Violet clair */
-  }
-  
-  .filter-select {
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #B9B0D6; /* Violet clair */
-    background-color: #DCEAF9; /* Bleu ciel */
-    color: #809BC4; /* Texte bleu foncé */
-    font-weight: bold;
-  }
-  
-  /* Catalogue et barre de recherche */
-  .catalogue {
-    text-align: center;
-    margin: 20px 0;
-  }
-  
-  .catalogue h2 {
-    color: #809BC4; /* Bleu foncé */
-  }
-  
-  .search-bar {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  .search-bar input {
-    padding: 8px;
-    width: 200px;
-    border: 1px solid #B9B0D6; /* Violet clair */
-    border-radius: 5px;
-    background-color: #EDEBFA; /* Blanc cassé */
-  }
-  
-  .search-bar button {
-    padding: 8px 15px;
-    border: none;
-    background-color: #F5CFE9; /* Rose pastel */
-    color: #809BC4; /* Texte bleu foncé */
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-  
-  .search-bar button:hover {
-    background-color: #B9B0D6; /* Violet clair */
-  }
-  
-  /* Section des produits */
-  .popular-products {
-    text-align: center;
-  }
-  
-  .popular-products h2 {
-    color: #809BC4; /* Bleu foncé */
-  }
-  
-  .product-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .product-card {
-    background-color: #DCEAF9; /* Bleu ciel */
-    padding: 15px;
-    border-radius: 5px;
-    text-align: center;
-    width: 180px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  .product-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-  
-  .product-card h3 {
-    color: #809BC4; /* Bleu foncé */
-  }
-  
-  .product-card p {
-    color: #B9B0D6; /* Violet clair */
-  }
-  
-  .product-card button {
-    margin-top: 10px;
-    padding: 8px;
-    border: none;
-    background-color: #F5CFE9; /* Rose pastel */
-    color: #809BC4; /* Texte bleu foncé */
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-  
-  .product-card button:hover {
-    background-color: #B9B0D6; /* Violet clair */
-  }
-  
+  width: 100% !important; /* Prend toute la largeur de l'écran */
+  max-width: 100% !important; /* Supprime toute limite de largeur */
+  margin: 0; /* Supprime tout espace autour */
+  padding: 20px; /* Garde un peu d'espace intérieur */
+  text-align: center;
+  background-color: #181818;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+/* Section de filtre */
+.filter-section {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+  margin-top: 73px;
+}
+
+.filter-button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #6E5E52; /* Taupe foncé */
+  color: #F0EDE5;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.filter-button:hover {
+  background-color: #3D3D3D; /* Gris anthracite */
+}
+
+.filter-select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #3D3D3D; /* Gris anthracite */
+  background-color: #D5C7BC; /* Beige doux */
+  color: #181818; /* Noir profond */
+  font-weight: bold;
+}
+
+/* Catalogue et barre de recherche */
+.catalogue {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.catalogue h2 {
+  color: #F0EDE5; /* Blanc cassé */
+}
+
+.search-bar {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.search-bar input {
+  padding: 8px;
+  width: 200px;
+  border: 1px solid #3D3D3D; /* Gris anthracite */
+  border-radius: 5px;
+  background-color: #D5C7BC; /* Beige doux */
+  color: #181818; /* Noir profond */
+  margin-right: 12px;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  background-color: #6E5E52; /* Taupe foncé */
+  color: #F0EDE5;
+  width: auto;
+  min-width: 120px;
+  max-width: 200px;
+}
+
+.search-bar button:hover {
+  background-color: #3D3D3D; /* Gris anthracite */
+}
+
+/* Section des produits */
+.popular-products {
+  text-align: center;
+}
+
+.popular-products h2 {
+  color: #F0EDE5; /* Blanc cassé */
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.product-card {
+  background-color: #D5C7BC; /* Beige doux */
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+  width: 180px;
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.product-card h3 {
+  color: #181818; /* Noir profond */
+}
+
+.product-card p {
+  color: #3D3D3D; /* Gris anthracite */
+}
+
+.product-card button {
+  margin-top: 10px;
+  padding: 8px;
+  border: none;
+  background-color: #6E5E52; /* Taupe foncé */
+  color: #F0EDE5;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.product-card button:hover {
+  background-color: #3D3D3D; /* Gris anthracite */
+}
+
+/* Footer */
+footer {
+  margin-top: 20px;
+  text-align: center;
+  padding: 10px;
+  background-color: #3D3D3D; /* Gris anthracite */
+  color: #F0EDE5; /* Blanc cassé */
+  border-radius: 5px;
+}

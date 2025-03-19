@@ -1,67 +1,29 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #DCEAF9; /* Fond doux et clair */
+    background-color: #181818; /* Noir profond */
+    color: #F0EDE5; /* Blanc cassé */
     margin: 0;
     padding: 0;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: auto;
     padding: 20px;
 }
 
-/* HEADER */
-.header {
-    background-color: #809BC4; /* Bleu doux */
-    padding: 15px 0;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.header h1 {
-    color: #F5CFE9; /* Rose pastel */
-    margin: 0;
-}
-
-.menu {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 0;
-}
-
-.menu li {
-    margin: 0;
-}
-
-.menu a {
-    text-decoration: none;
-    color: #EDEBFA; /* Blanc légèrement violet */
-    padding: 8px 16px;
-    border-radius: 8px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.menu a:hover {
-    background-color: #B9B0D6; /* Mauve */
-    color: #fff;
-}
-
 /* PANIER */
 .panier {
-    background: #EDEBFA; /* Fond léger */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #3D3D3D; /* Gris anthracite */
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin-top: 20px;
 }
 
 h2 {
     text-align: center;
-    color: #809BC4; /* Bleu pastel */
+    color: #D5C7BC; /* Beige doux */
 }
 
 /* TABLEAU */
@@ -69,53 +31,56 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
+    background: #6E5E52; /* Taupe foncé */
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 th, td {
-    padding: 10px;
-    border-bottom: 1px solid #DCEAF9;
+    padding: 12px;
+    border-bottom: 1px solid #3D3D3D;
     text-align: center;
 }
 
 th {
-    background-color: #F5CFE9; /* Rose pastel */
-    color: #809BC4; /* Bleu doux */
+    background-color: #D5C7BC; /* Beige doux */
+    color: #181818; /* Noir profond */
 }
 
 /* IMAGE DES PRODUITS */
 .produit-image {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 10px;
     object-fit: cover;
-    border: 2px solid #B9B0D6;
+    border: 2px solid #D5C7BC;
 }
 
 /* INPUT QUANTITÉ */
 td input[type="number"] {
-    width: 50px;
+    width: 60px;
     padding: 5px;
-    border: 1px solid #B9B0D6;
+    border: 1px solid #F0EDE5;
     border-radius: 5px;
     text-align: center;
-    background-color: #EDEBFA;
-    color: #809BC4;
+    background-color: #3D3D3D;
+    color: #F0EDE5;
 }
 
 /* BOUTON SUPPRIMER */
-td button {
-    background-color: #F5CFE9;
-    color: #809BC4;
+.btn-supprimer {
+    background-color: #6E5E52;
+    color: #F0EDE5;
     border: none;
-    padding: 5px 10px;
+    padding: 7px 12px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-td button:hover {
-    background-color: #B9B0D6;
-    color: white;
+.btn-supprimer:hover {
+    background-color: #D5C7BC;
+    color: #181818;
 }
 
 /* TOTAL */
@@ -127,7 +92,7 @@ td button:hover {
 .total-section p {
     font-size: 18px;
     font-weight: bold;
-    color: #809BC4;
+    color: #D5C7BC;
 }
 
 /* BOUTONS */
@@ -135,28 +100,48 @@ td button:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
-.buttons a {
-    color: #809BC4;
+.btn-retour {
+    color: #F0EDE5;
     text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
 }
 
-.buttons a:hover {
-    color: #B9B0D6;
+.btn-retour:hover {
+    color: #D5C7BC;
 }
 
-.checkout {
-    background-color: #809BC4;
+/* BOUTON CHECKOUT */
+/* BOUTON CHECKOUT (Taille ajustée et centré) */
+.btn-checkout {
+    background-color: #6E5E52;
     color: white;
-    padding: 10px 20px;
+    padding: 10px 20px; /* Taille équilibrée */
+    font-size: 14px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
+    width: fit-content; /* Taille adaptée au contenu */
+    display: block;
+    margin: 20px auto; /* Centrage horizontal */
 }
 
-.checkout:hover {
-    background-color: #B9B0D6;
+.btn-checkout:hover {
+    background-color: #D5C7BC;
+    color: #181818;
+    transform: scale(1.05);
+}
+
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #3D3D3D;
+    color: #F0EDE5;
+    margin-top: 20px;
 }
