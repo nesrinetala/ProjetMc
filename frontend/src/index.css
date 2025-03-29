@@ -1,115 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset minimal */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
+/* Styles de base */
 html, body {
   width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; /* Empêche le scroll horizontal */
-}
-
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: #fff; /* Couleur de fond de la navbar */
-}
-
-.container {
-  width: 100%;
-  max-width: 100% ;
-  margin: 0 auto;
-}
-
-
-:root {
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color: #4A4E69; /* Texte principal */
-  background-color: #FFDFC3; /* Beige clair */
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  width: 100%;
-  height: 100%;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
 }
 
-div {
+/* Navbar fixe */
+.navbar {
+  position: fixed;
+  top: 0;
   width: 100%;
+  z-index: 1000;
+  background-color: #B17973; /* Couleur de votre navbar */
 }
 
-a {
-  font-weight: 500;
-  color: #FEA38E; /* Orange saumon */
-  text-decoration: none;
-}
-
-a:hover {
-  color: #F3B5A0; /* Rose pâle */
-}
-
+/* Correction pour l'espace sous la navbar */
 body {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: #FFDFC3; /* Beige clair */
+  padding-top: 83px; /* Hauteur de votre navbar */
 }
 
-h1 {
-  font-size: 2.5em;
-  line-height: 1.1;
-  color: #4A4E69;
-}
-
-button {
-  border-radius: 8px;
-  border: none;
-  padding: 10px 15px;
-  font-size: 1em;
-  font-weight: bold;
-  font-family: inherit;
-  background-color: #FEA38E; /* Orange saumon */
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s;
-}
-
-button:hover {
-  background-color: #F3B5A0; /* Rose pâle */
-  transform: scale(1.05);
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #4A4E69;
-    background-color: #F6E6D0; /* Crème */
-  }
-
-  a:hover {
-    color: #F3B5A0;
-  }
-
-  button {
-    background-color: #FBA2AB; /* Rose doux */
-  }
-}
+/* Supprimez les autres styles globaux qui pourraient interférer */

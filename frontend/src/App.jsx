@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/accueil/Home";
 import Header from './pages/Header';
 import Catalogue from './pages/Catalogue/Catalogue';
@@ -8,11 +8,9 @@ import Inscription from './pages/Inscription/Inscription';
 import Panier from './pages/Panier/Panier';
 import TableauDeBord from './pages/TableauDeBord/TableauDeBord';
 import ProductDetails from './pages/productDetails/productDetails';
+import products from './data/products'; // Importez vos produits
 
 function Layout() {
-  const location = useLocation();
-  console.log(location);
-
   useEffect(() => {
     document.body.style.margin = "0";
     document.body.style.padding = "0";
@@ -30,7 +28,10 @@ function Layout() {
         <Route path="/panier" element={<Panier />} />
         <Route path="/tableau_de_bord" element={<TableauDeBord />} />
         <Route path="/header" element={<Header />} />
-        <Route path="/productdetails" element={<ProductDetails />} />
+        <Route 
+          path="/productdetails/:id" 
+          element={<ProductDetails products={products} />} 
+        />
       </Routes>
     </div>
   );
