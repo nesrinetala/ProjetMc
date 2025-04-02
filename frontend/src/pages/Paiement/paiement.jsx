@@ -1,49 +1,82 @@
-document.getElementById("payment-form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Empêche le rechargement de la page
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; 
+import "./paiement.css"; 
+import Navbar from "../Navbar/Navbar";
 
-    const name = document.getElementById("name").value.trim();
-    const cardNumber = document.getElementById("card-number").value.trim();
-    const expiryDate = document.getElementById("expiry-date").value.trim();
-    const cvv = document.getElementById("cvv").value.trim();
-    const message = document.getElementById("message");
+const Paiement = () => {
+  useEffect(() => {
+    console.log("✅ Page Paiement chargée !");
+  }, []);
 
-    // Vérification simple des champs
-    if (name === "" || cardNumber === "" || expiryDate === "" || cvv === "") {
-        message.textContent = "Veuillez remplir tous les champs.";
-        message.style.color = "red";
-        return;
+  const [name, setName] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [message, setMessage] = useState("");
+
+  const navigate = useNavigate(); 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!name || !cardNumber || !expiryDate || !cvv) {
+      setMessage("Veuillez remplir tous les champs.");
+      return;
     }
 
-    // Vérification du format du numéro de carte (simple)
     const cardRegex = /^\d{4} \d{4} \d{4} \d{4}$/;
     if (!cardRegex.test(cardNumber)) {
-        message.textContent = "Numéro de carte invalide.";
-        message.style.color = "red";
-        return;
+      setMessage("Numéro de carte invalide.");
+      return;
     }
 
-    // Vérification du format de la date d'expiration
     const expiryRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
     if (!expiryRegex.test(expiryDate)) {
-        message.textContent = "Date d'expiration invalide.";
-        message.style.color = "red";
-        return;
+      setMessage("Date d'expiration invalide.");
+      return;
     }
 
-    // Vérification du format du CVV
     if (cvv.length !== 3 || isNaN(cvv)) {
-        message.textContent = "CVV invalide.";
-        message.style.color = "red";
-        return;
+      setMessage("CVV invalide.");
+      return;
     }
 
-    // Message de succès
-    message.textContent = "Paiement réussi ! 🎉";
-    message.style.color = "green";
+    setMessage("Paiement réussi ! 🎉");
 
-    // Réinitialiser le formulaire après 2 secondes
     setTimeout(() => {
-        document.getElementById("payment-form").reset();
-        message.textContent = "";
+      setName("");
+      setCardNumber("");
+      setExpiryDate("");
+      setCvv("");
+      setMessage("");
+      navigate("/confirmation"); 
     }, 2000);
-});
+  };
+
+  return (
+    <div className="page-paiement">
+      <Navbar />
+      <div className="paiement-container">
+        <h2>💳 Paiement</h2>
+        <form onSubmit={handleSubmit} className="payment-form">
+          <label>Nom sur la carte</label>
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+
+          <label>Numéro de carte</label>
+          <input type="text" placeholder="1234 5678 9012 3456" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} required />
+
+          <label>Date d'expiration</label>
+          <input type="text" placeholder="MM/YY" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} required />
+
+          <label>CVV</label>
+          <input type="text" placeholder="123" value={cvv} onChange={(e) => setCvv(e.target.value)} required />
+
+          <button type="submit" className="btn-payer">Payer</button>
+          {message && <p className="message">{message}</p>}
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Paiement;

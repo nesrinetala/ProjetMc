@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #181818; /* Noir profond */
     color: #F0EDE5; /* Blanc cassé */
     margin: 0;
@@ -19,11 +19,21 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin-top: 20px;
+    text-align: center;
 }
 
 h2 {
     text-align: center;
     color: #D5C7BC; /* Beige doux */
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* PANIER VIDE */
+.panier-vide {
+    font-size: 18px;
+    color: #D5C7BC;
+    margin-top: 20px;
 }
 
 /* TABLEAU */
@@ -37,7 +47,7 @@ table {
 }
 
 th, td {
-    padding: 12px;
+    padding: 15px;
     border-bottom: 1px solid #3D3D3D;
     text-align: center;
 }
@@ -47,7 +57,14 @@ th {
     color: #181818; /* Noir profond */
 }
 
-/* IMAGE DES PRODUITS */
+/* INFO PRODUIT */
+.produit-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+}
+
 .produit-image {
     width: 60px;
     height: 60px;
@@ -69,18 +86,17 @@ td input[type="number"] {
 
 /* BOUTON SUPPRIMER */
 .btn-supprimer {
-    background-color: #6E5E52;
-    color: #F0EDE5;
+    background-color: transparent;
+    color: #D5C7BC;
     border: none;
-    padding: 7px 12px;
-    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: transform 0.2s, color 0.3s;
+    font-size: 18px;
 }
 
 .btn-supprimer:hover {
-    background-color: #D5C7BC;
-    color: #181818;
+    color: #E57373;
+    transform: scale(1.1);
 }
 
 /* TOTAL */
@@ -90,7 +106,7 @@ td input[type="number"] {
 }
 
 .total-section p {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     color: #D5C7BC;
 }
@@ -115,19 +131,15 @@ td input[type="number"] {
 }
 
 /* BOUTON CHECKOUT */
-/* BOUTON CHECKOUT (Taille ajustée et centré) */
 .btn-checkout {
     background-color: #6E5E52;
     color: white;
-    padding: 10px 20px; /* Taille équilibrée */
-    font-size: 14px;
+    padding: 12px 25px;
+    font-size: 16px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
-    width: fit-content; /* Taille adaptée au contenu */
-    display: block;
-    margin: 20px auto; /* Centrage horizontal */
 }
 
 .btn-checkout:hover {
@@ -135,7 +147,6 @@ td input[type="number"] {
     color: #181818;
     transform: scale(1.05);
 }
-
 
 /* FOOTER */
 footer {

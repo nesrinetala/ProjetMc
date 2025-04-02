@@ -1,6 +1,8 @@
 import Navbar from "../Navbar/Navbar";
 import { useState, useEffect } from 'react';
 import { ShoppingCart, Heart, ChevronRight } from 'lucide-react';
+import CommentSection from "./CommentSection";
+
 
 export default function ProductBeautyPage() {
   const [favorite, setFavorite] = useState(false);
@@ -276,6 +278,9 @@ export default function ProductBeautyPage() {
             </div>
           </div>
         </section>
+
+       {/* Section des commentaires */}
+    <CommentSection />
 
         <footer className="text-center py-5 bg-[#5A4A42] text-white font-bold">
           <p>&copy; 2025 Mon Site - Tous droits réservés</p>
