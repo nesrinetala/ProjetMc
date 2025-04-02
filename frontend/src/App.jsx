@@ -6,8 +6,8 @@ import Catalogue from "./pages/Catalogue/Catalogue";
 import Connexion from "./pages/Connexion/Connexion";
 import Inscription from "./pages/Inscription/Inscription";
 import Panier from "./pages/Panier/Panier";
-import Paiement from "./pages/Paiement/paiement"; // Vérifie que le fichier est bien nommé "Paiement.jsx"
-
+import Paiement from "./pages/Paiement/paiement"; 
+import AddProduct from "./pages/AddProduct/addproduct";
 import TableauDeBord from "./pages/TableauDeBord/TableauDeBord";
 import ProductDetails from "./pages/productDetails/productDetails";
 import products from "./data/products"; // Importation des produits
@@ -26,6 +26,7 @@ function Layout() {
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/panier" element={<Panier />} />
         <Route path="/paiement" element={<Paiement />} />
+        <Route path="/addproduct" element={<AddProduct/>} />
         <Route path="/tableau_de_bord" element={<TableauDeBord />} />
         <Route path="/header" element={<Header />} />
         <Route path="/productdetails/:id" element={<ProductDetails products={products} />} />
