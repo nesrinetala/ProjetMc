@@ -1,0 +1,134 @@
+:root {
+    --bg-light: #fff8f5;
+    --text-main: #4a3f35;
+    --accent: #e89cae;
+    --secondary: #a67b5b;
+    --card-bg: #ffffff;
+    --hover-bg: #fceef1;
+    --shadow: rgba(255, 192, 203, 0.2);
+  }
+  
+  .profil-container {
+    padding: 100px 20px 40px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--bg-light);
+    min-height: 100vh;
+    transition: background 0.3s ease;
+  }
+  
+  .profil-card {
+    background: var(--card-bg);
+    border: 1px solid #f0dada;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px var(--shadow);
+    max-width: 600px;
+    width: 100%;
+    transition: background 0.3s ease;
+  }
+  
+  .profil-header {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .avatar {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 999px;
+    border: 4px solid var(--accent);
+    margin-bottom: 10px;
+  }
+  
+  .profil-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--accent);
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .edit-btn {
+    margin-top: 10px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s;
+  }
+  
+  .edit-btn:hover {
+    background: #d97d9a;
+  }
+  
+  .dark-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .profil-tabs {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .profil-tabs button {
+    flex: 1;
+    padding: 10px;
+    background: var(--hover-bg);
+    border: none;
+    border-radius: 10px;
+    color: var(--text-main);
+    font-weight: 500;
+    transition: background 0.3s ease;
+  }
+  
+  .profil-tabs button.active {
+    background: var(--accent);
+    color: white;
+  }
+  
+  .profil-content {
+    margin-top: 20px;
+  }
+  
+  .profil-info p {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: var(--text-main);
+  }
+  
+  .profil-info span {
+    font-weight: 600;
+    color: var(--secondary);
+  }
+  
+  .profil-loading {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+  }
+  
+  /* 🌙 Dark Mode Pastel */
+  .profil-container.dark {
+    --bg-light: #1f1d2b;
+    --text-main: #f3e6e8;
+    --accent: #ffc0cb;
+    --secondary: #f5e8c7;
+    --card-bg: #2e2b3c;
+    --hover-bg: #3f3b50;
+    --shadow: rgba(255, 192, 203, 0.05);
+  }
+  

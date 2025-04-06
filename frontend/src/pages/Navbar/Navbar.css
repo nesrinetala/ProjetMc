@@ -1,4 +1,39 @@
-/* Navbar */
+.navbar a {
+  display: flex;
+  align-items: center;
+}
+.navbar a span {
+  font-family: 'Cursive', sans-serif;
+  font-size: 2.5rem;
+  color: #F59E0B; /* Couleur dorée pour l'effet lumineux */
+  font-weight: bold;
+  transition: transform 0.3s ease-in-out;
+}
+/* Animation au survol du logo */
+.navbar a:hover span {
+  transform: scale(1.1);
+}
+/* Effet glow pour le logo */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px rgba(245, 158, 11, 0.8);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(245, 158, 11, 0.8);
+  }
+}
+.logo-glow {
+  animation: glow 2s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+.logo-glow:hover {
+  animation: glow 1s ease-in-out infinite;
+  transform: scale(1.05);
+}
+/* Autres styles */
 .navbar {
   background-color: rgba(74, 63, 53, 0.9); /* Couleur semi-transparente */
   padding: 12px 20px;
@@ -12,97 +47,4 @@
   height: 60px;
   z-index: 1000;
   backdrop-filter: blur(10px); /* Ajout de l'effet de flou */
-}
-
-/* Logo */
-.navbar-logo h1 {
-  color: #F5E8C7;
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* Menu Navigation */
-.navbar-menu {
-  display: flex;
-}
-
-.navbar-menu ul {
-  display: flex;
-  gap: 18px;
-  list-style: none;
-  padding: 0;
-}
-
-.navbar-menu li {
-  margin: 0;
-}
-
-.navbar-menu a {
-  text-decoration: none;
-  color: #F5E8C7;
-  font-weight: bold;
-  padding: 8px 15px;
-  border-radius: 10px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-/* Style du lien actif */
-.navbar-menu .active {
-  background-color: #A67B5B;
-  color: white;
-  font-weight: bold;
-}
-
-/* Effet au survol */
-.navbar-menu a:hover {
-  background-color: #A67B5B;
-  color: #4A3F35;
-  transform: scale(1.1);
-}
-
-/* Bouton "Menu" pour mobile */
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-size: 24px;
-  padding: 8px;
-}
-
-/* Responsive */
-@media screen and (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-
-  .navbar-menu {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    background: rgba(74, 63, 53, 0.9); /* Fond semi-transparent */
-    padding: 10px 0;
-    text-align: center;
-    backdrop-filter: blur(10px); /* Effet de flou */
-  }
-
-  .nav-open {
-    display: flex;
-  }
-
-  .navbar-menu ul {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .navbar-menu a {
-    display: block;
-    padding: 12px;
-  }
 }

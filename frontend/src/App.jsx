@@ -6,6 +6,7 @@ import Catalogue from "./pages/Catalogue/Catalogue";
 import Connexion from "./pages/Connexion/Connexion";
 import Inscription from "./pages/Inscription/Inscription";
 import Panier from "./pages/Panier/Panier";
+import Profil from "./pages/Profil/Profil";
 import Paiement from "./pages/Paiement/paiement"; 
 import AddProduct from "./pages/AddProduct/addproduct";
 import TableauDeBord from "./pages/TableauDeBord/TableauDeBord";
@@ -25,6 +26,7 @@ function Layout() {
         <Route path="/connexion" element={<Connexion />} />
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/panier" element={<Panier />} />
+        <Route path="/profil" element={<Profil />} />
         <Route path="/paiement" element={<Paiement />} />
         <Route path="/addproduct" element={<AddProduct/>} />
         <Route path="/tableau_de_bord" element={<TableauDeBord />} />
