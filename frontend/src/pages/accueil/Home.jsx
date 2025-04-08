@@ -35,14 +35,8 @@ const Home = () => {
           </div>
         </div>
         
-        {/* Contenu superposé */}
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Bienvenue sur notre site</h1>
-          <p className="text-lg md:text-xl mb-6">Découvrez nos produits exceptionnels</p>
-          <button className="bg-white text-[#B17973] px-6 py-2 rounded-lg font-bold hover:bg-opacity-90 transition">
-            Explorer la collection
-          </button>
-        </div>
+        
+        
       </div>
 
       {/* Section produits (inchangée) */}

@@ -1,3 +1,4 @@
+// src/pages/Panier/Panier.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import pour la navigation
 import "./panier.css";
@@ -29,7 +30,7 @@ const Panier = () => {
   );
 
   const handleCheckout = () => {
-    navigate("/paiement"); // Redirection vers la page paiement
+    navigate("/commande"); // Rediriger vers la page de commande
   };
 
   return (
@@ -76,7 +77,7 @@ const Panier = () => {
             <p>Total : <span className="total-general">{totalGeneral}€</span></p>
             <div className="buttons">
               <a href="/catalogue" className="btn-retour">← Continuer mes achats</a>
-              <button className="btn-checkout" onClick={handleCheckout}>Passer à la caisse</button>
+              <button className="btn-checkout" onClick={handleCheckout}>Finaliser ma commande</button> {/* Nouveau texte du bouton */}
             </div>
           </div>
         </main>
@@ -89,4 +90,3 @@ const Panier = () => {
 };
 
 export default Panier;
-

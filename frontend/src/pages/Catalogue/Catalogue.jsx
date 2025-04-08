@@ -38,7 +38,10 @@ export default function Catalogue() {
         <button className="filter-button" onClick={() => setCategory("cheveux")}>Cheveux</button>
         <button className="filter-button" onClick={() => setCategory("peau")}>Peau</button>
         <button className="filter-button" onClick={() => setCategory("maquillage")}>Maquillage</button>
-
+        <button className="filter-button" onClick={() => setCategory("parfum")}>Parfum</button>
+        <button className="filter-button" onClick={() => setCategory("corps&bain")}>Corps & Bain</button>
+        <button className="filter-button" onClick={() => setCategory("marques")}>Marques</button>
+        <button className="filter-button" onClick={() => setCategory("nouveautés")}>Nouveautés</button>
         <select className="filter-select" onChange={(e) => setPriceFilter(e.target.value)}>
           <option value="">Prix ▾</option>
           <option value="Moins de 20€">Moins de 20€</option>
@@ -48,7 +51,7 @@ export default function Catalogue() {
       </div>
 
       <div className="catalogue">
-        <h2>Catalogue des produits</h2>
+        
         <div className="search-bar">
           <input
             type="text"

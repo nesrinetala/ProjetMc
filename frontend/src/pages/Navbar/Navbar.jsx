@@ -88,26 +88,11 @@ export default function Navbar() {
           >
             Catalogue
           </Link>
-          {!isAuthenticated && (
+          
+         
             <>
               <Link
-                to="/connexion"
-                className="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 px-3 py-2 transition-colors duration-200"
-              >
-                Se connecter
-              </Link>
-              <Link
-                to="/inscription"
-                className="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 px-3 py-2 transition-colors duration-200"
-              >
-                Inscription
-              </Link>
-            </>
-          )}
-          {isAuthenticated && (
-            <>
-              <Link
-                to="/tableau_de_bord"
+                to="/TableauDeBord"
                 className="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 px-3 py-2 transition-colors duration-200"
               >
                 Tableau de bord
@@ -119,7 +104,7 @@ export default function Navbar() {
                 Profil
               </Link>
             </>
-          )}
+         
         </div>
       </div>
 

@@ -53,6 +53,10 @@ const Paiement = () => {
     }, 2000);
   };
 
+  const handleCancel = () => {
+    navigate("/panier"); // Change "/panier" selon la route souhaitée
+  };
+
   return (
     <div className="page-paiement">
       <Navbar />
@@ -71,7 +75,11 @@ const Paiement = () => {
           <label>CVV</label>
           <input type="text" placeholder="123" value={cvv} onChange={(e) => setCvv(e.target.value)} required />
 
-          <button type="submit" className="btn-payer">Payer</button>
+          <div className="button-group">
+            <button type="submit" className="btn-payer">Payer</button>
+            <button type="button" className="btn-annuler" onClick={handleCancel}>Annuler</button>
+          </div>
+
           {message && <p className="message">{message}</p>}
         </form>
       </div>

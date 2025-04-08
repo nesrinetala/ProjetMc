@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "../Navbar/Navbar"; // Assure-toi que le chemin est correct
+import React, { useState } from "react";
+import { useUser } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";  // Nouvelle importation pour React Router v6
+import Navbar from "../Navbar/Navbar"; 
 import "./Profil.css";
+
 export default function Profil() {
-  const [user, setUser] = useState(null);
+  const { user } = useUser();
   const [activeTab, setActiveTab] = useState("infos");
   const [darkMode, setDarkMode] = useState(false);
-  useEffect(() => {
-    const fakeUser = {
-      nom: "Lana",
-      prenom: "Glow",
-      email: "lana@example.com",
-      telephone: "+33 6 12 34 56 78",
-      avatar: "https://i.pravatar.cc/150?img=47",
-    };
-    setUser(fakeUser);
-  }, []);
+  const navigate = useNavigate();
+
+  const handleEditProfile = () => {
+    navigate("/edit-profile"); // Utilisation de navigate au lieu de history.push
+  };
+
   return (
     <>
       <Navbar />
@@ -23,16 +22,29 @@ export default function Profil() {
           <div className="profil-header">
             {user && <img src={user.avatar} alt="avatar" className="avatar" />}
             <h2 className="profil-title">{user?.prenom} {user?.nom}</h2>
-            <button className="edit-btn">Modifier le profil</button>
-            <button onClick={() => setDarkMode(!darkMode)} className="dark-toggle">
-              {darkMode ? "🌞" : "🌙"}
-            </button>
+            <button onClick={handleEditProfile} className="edit-btn">Modifier le profil</button>
           </div>
           <div className="profil-tabs">
-            <button onClick={() => setActiveTab("infos")} className={activeTab === "infos" ? "active" : ""}>Mes infos</button>
-            <button onClick={() => setActiveTab("commandes")} className={activeTab === "commandes" ? "active" : ""}>Commandes</button>
-            <button onClick={() => setActiveTab("wishlist")} className={activeTab === "wishlist" ? "active" : ""}>Wishlist</button>
-            <button onClick={() => setActiveTab("parametres")} className={activeTab === "parametres" ? "active" : ""}>Paramètres</button>
+            <button 
+              onClick={() => setActiveTab("infos")} 
+              className={activeTab === "infos" ? "active" : ""}>
+              Mes infos
+            </button>
+            <button 
+              onClick={() => setActiveTab("commandes")} 
+              className={activeTab === "commandes" ? "active" : ""}>
+              Commandes
+            </button>
+            <button 
+              onClick={() => setActiveTab("wishlist")} 
+              className={activeTab === "wishlist" ? "active" : ""}>
+              Wishlist
+            </button>
+            <button 
+              onClick={() => setActiveTab("parametres")} 
+              className={activeTab === "parametres" ? "active" : ""}>
+              Paramètres
+            </button>
           </div>
           <div className="profil-content">
             {activeTab === "infos" && user && (

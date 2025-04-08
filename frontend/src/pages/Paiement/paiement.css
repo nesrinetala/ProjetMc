@@ -1,11 +1,10 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #181818; /* Noir profond */
+    background-color: #181818;
     margin: 0;
-    color: #F0EDE5; /* Blanc cassé */
+    color: #F0EDE5;
 }
 
-/* Correction pour éviter le centrage excessif sur toute la page */
 .page-paiement {
     display: flex;
     flex-direction: column;
@@ -13,64 +12,82 @@ body {
     justify-content: flex-start;
     min-height: 100vh;
     width: 100%;
-    padding-top: 80px; /* Ajuste en fonction de la hauteur de la navbar */
+    padding-top: 80px;
 }
 
 .paiement-container {
-    background-color: #3D3D3D; /* Gris anthracite */
+    background-color: #3D3D3D;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     width: 90%;
-    max-width: 400px; /* Bonne adaptation mobile */
+    max-width: 400px;
     text-align: center;
 }
 
 h2 {
     margin-bottom: 20px;
-    color: #D5C7BC; /* Beige doux */
+    color: #D5C7BC;
 }
 
-.form-group {
-    margin-bottom: 15px;
-    text-align: left;
-    width: 100%;
-}
-
-.form-group label {
+.payment-form label {
     display: block;
     margin-bottom: 5px;
+    text-align: left;
     color: #F0EDE5;
 }
 
-.form-group input {
+.payment-form input {
     width: 100%;
     padding: 10px;
+    margin-bottom: 15px;
     border: 1px solid #F0EDE5;
     border-radius: 5px;
     background-color: #3D3D3D;
     color: #F0EDE5;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #6E5E52; /* Taupe foncé */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-payer {
+    background-color: #6E5E52;
     border: none;
+    padding: 10px;
     border-radius: 6px;
     color: white;
     cursor: pointer;
+    flex: 1;
     transition: background-color 0.3s, transform 0.2s;
-    transform-origin: center;
 }
 
-button:hover {
+.btn-payer:hover {
     background-color: #D5C7BC;
     color: #181818;
     transform: scale(1.05);
 }
 
-#message {
+.btn-annuler {
+    background-color: transparent;
+    border: 1px solid #D5C7BC;
+    color: #D5C7BC;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    flex: 1;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-annuler:hover {
+    background-color: #D5C7BC;
+    color: #181818;
+    transform: scale(1.05);
+}
+
+.message {
     margin-top: 15px;
     font-weight: bold;
 }

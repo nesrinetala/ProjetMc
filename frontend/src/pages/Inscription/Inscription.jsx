@@ -1,4 +1,5 @@
 import Navbar from "../Navbar/Navbar";
+import { Link } from "react-router-dom";
 import "./Inscription.css";
 
 const Inscription = () => {
@@ -19,11 +20,11 @@ const Inscription = () => {
             <input type="email" name="email" placeholder="Email" required />
             <input type="password" name="password" placeholder="Mot de passe" required />
             <input type="password" name="confirm-password" placeholder="Confirmer le mot de passe" required />
-            <button type="submit">S&apos;inscrire</button>
+            <button type="submit">S'inscrire</button>
           </form>
           <div className="form-links">
             <p>
-              Vous avez déjà un compte ? <a href="./productDetails">Se connecter</a>
+              Vous avez déjà un compte ? <Link to="/connexion">Se connecter</Link>
             </p>
           </div>
         </div>
