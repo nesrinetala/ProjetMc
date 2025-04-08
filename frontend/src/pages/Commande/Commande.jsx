@@ -6,6 +6,7 @@ import "./Commande.css";
 
 const Commande = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     prenom: "",
     nom: "",
@@ -42,8 +43,29 @@ const Commande = () => {
     }));
   };
 
+  const validateStep = (step) => {
+    const newErrors = {};
+    
+    if (step === 1) {
+      if (!formData.prenom.trim()) newErrors.prenom = "Prénom requis";
+      if (!formData.nom.trim()) newErrors.nom = "Nom requis";
+      if (!formData.telephone.trim()) newErrors.telephone = "Téléphone requis";
+      else if (!/^[0-9]{10}$/.test(formData.telephone)) {
+        newErrors.telephone = "Numéro invalide (10 chiffres)";
+      }
+    } else if (step === 2) {
+      if (!formData.wilaya) newErrors.wilaya = "Wilaya requise";
+      if (!formData.adresse.trim()) newErrors.adresse = "Adresse requise";
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleNextStep = () => {
-    setCurrentStep(currentStep + 1);
+    if (validateStep(currentStep)) {
+      setCurrentStep(currentStep + 1);
+    }
   };
 
   const handlePrevStep = () => {
@@ -71,8 +93,9 @@ const Commande = () => {
                 placeholder="Votre prénom"
                 value={formData.prenom}
                 onChange={handleChange}
-                required
+                className={errors.prenom ? "error" : ""}
               />
+              {errors.prenom && <span className="error-message">{errors.prenom}</span>}
             </div>
             <div className="form-group">
               <label htmlFor="nom">Nom</label>
@@ -83,8 +106,9 @@ const Commande = () => {
                 placeholder="Votre nom"
                 value={formData.nom}
                 onChange={handleChange}
-                required
+                className={errors.nom ? "error" : ""}
               />
+              {errors.nom && <span className="error-message">{errors.nom}</span>}
             </div>
             <div className="form-group">
               <label htmlFor="telephone">Téléphone</label>
@@ -95,8 +119,9 @@ const Commande = () => {
                 placeholder="Votre téléphone"
                 value={formData.telephone}
                 onChange={handleChange}
-                required
+                className={errors.telephone ? "error" : ""}
               />
+              {errors.telephone && <span className="error-message">{errors.telephone}</span>}
             </div>
             <div className="form-group">
               <label htmlFor="telephoneSecondaire">Téléphone secondaire</label>
@@ -140,7 +165,8 @@ const Commande = () => {
                 name="wilaya"
                 value={formData.wilaya}
                 onChange={handleChange}
-                required
+                className={errors.wilaya ? "error" : ""}
+                style={{ width: '100%', padding: '10px', fontSize: '16px' }}
               >
                 <option value="">Sélectionnez votre wilaya</option>
                 {wilayas.map((wilaya) => (
@@ -162,16 +188,17 @@ const Commande = () => {
                     color: '#6c63ff'
                   }} 
                 />
-                <input
-                  type="text"
-                  id="adresse"
-                  name="adresse"
-                  placeholder="Votre adresse complète"
-                  value={formData.adresse}
-                  onChange={handleChange}
-                  required
-                  style={{ paddingLeft: '35px' }}
-                />
+              <input
+                type="text"
+                id="adresse"
+                name="adresse"
+                placeholder="Votre adresse complète"
+                value={formData.adresse}
+                onChange={handleChange}
+                className={errors.adresse ? "error" : ""}
+                style={{ paddingLeft: '35px', width: '100%' }}
+              />
+              {errors.adresse && <span className="error-message">{errors.adresse}</span>}
               </div>
             </div>
             <div className="form-group">

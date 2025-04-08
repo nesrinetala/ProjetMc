@@ -93,6 +93,23 @@ textarea {
     resize: vertical;
 }
 
+/* Validation et erreurs */
+.error {
+  border-color: #ff6b6b !important;
+}
+
+.error-message {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  display: block;
+}
+
+.required-field::after {
+  content: " *";
+  color: #ff6b6b;
+}
+
 /* Boutons */
 .btn-passer-livraison, 
 .btn-confirmer, 

@@ -40,11 +40,7 @@ export default function Profil() {
               className={activeTab === "wishlist" ? "active" : ""}>
               Wishlist
             </button>
-            <button 
-              onClick={() => setActiveTab("parametres")} 
-              className={activeTab === "parametres" ? "active" : ""}>
-              Paramètres
-            </button>
+            
           </div>
           <div className="profil-content">
             {activeTab === "infos" && user && (
