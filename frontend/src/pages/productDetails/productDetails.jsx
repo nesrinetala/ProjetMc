@@ -2,6 +2,9 @@ import Navbar from "../Navbar/Navbar";
 import { useState, useEffect } from 'react';
 import { ShoppingCart, Heart, ChevronRight } from 'lucide-react';
 import CommentSection from "./CommentSection";
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function ProductBeautyPage() {
@@ -11,6 +14,7 @@ export default function ProductBeautyPage() {
 
   // Données du produit en français
   const product = {
+    id: 1, // ID du produit pour les requêtes API
     name: "Sérum Éclat Doré",
     category: "#BeautéPourPeauRadieuse",
     price: 49.99,
@@ -105,7 +109,36 @@ export default function ProductBeautyPage() {
                   {product.category}
                 </h5>
                 <button 
-                  onClick={() => setFavorite(!favorite)}
+                  onClick={async () => {
+                    try {
+                      const newFavoriteStatus = !favorite;
+                      await axios.post('http://localhost:8000/api/favoris/', {
+                        produit_id: product.id,
+                        action: newFavoriteStatus ? 'ajouter' : 'supprimer'
+                      }, {
+                        headers: {
+                          Authorization: `Bearer ${localStorage.getItem('token')}`
+                        }
+                      });
+                      setFavorite(newFavoriteStatus);
+                      toast.success(
+                        newFavoriteStatus 
+                          ? 'Produit ajouté aux favoris!' 
+                          : 'Produit retiré des favoris',
+                        {
+                          position: "top-right",
+                          autoClose: 3000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                        }
+                      );
+                    } catch (error) {
+                      toast.error("Erreur lors de la mise à jour des favoris");
+                      console.error(error);
+                    }
+                  }}
                   className={`p-2 ${favorite ? 'text-[#B17973]' : 'text-[#8C6A5D]'} hover:text-[#B17973] transition`}
                   data-aos="zoom-in-left"
                   data-aos-delay="200"
@@ -151,7 +184,36 @@ export default function ProductBeautyPage() {
               </div>
 
               <div className="main-hero flex flex-wrap items-center gap-4" data-aos="flip-down" data-aos-delay="600" data-aos-duration="1400">
-                <button className="bg-[#B17973] hover:bg-[#D7A8A2] text-white px-8 py-3 rounded-md flex items-center transition-transform hover:scale-[1.02]">
+                <button 
+                  className="bg-[#B17973] hover:bg-[#D7A8A2] text-white px-8 py-3 rounded-md flex items-center transition-transform hover:scale-[1.02]"
+                  onClick={async () => {
+                    try {
+                      const response = await axios.post('http://localhost:8000/api/panier/ajouter/', {
+                        produit_id: product.id,
+                        quantite: quantity
+                      }, {
+                        headers: {
+                          Authorization: `Bearer ${localStorage.getItem('token')}`
+                        }
+                      });
+                      
+                      // Afficher notification
+                      toast.success('Produit ajouté au panier avec succès!', {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                      });
+                      
+                      // Mettre à jour le contexte panier si nécessaire
+                    } catch (error) {
+                      toast.error("Erreur lors de l'ajout au panier");
+                      console.error(error);
+                    }
+                  }}
+                >
                   <ShoppingCart className="mr-2" />
                   Ajouter au panier ({(product.price * quantity).toFixed(2)}€)
                 </button>

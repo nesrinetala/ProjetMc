@@ -1,7 +1,9 @@
 import Navbar from "../Navbar/Navbar";
 import { Link } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
 
 const Home = () => {
+  const { addToWishlist } = useUser();
   const products = [
     { id: 1, name: "Crème Hydratante", price: 20, image: "/images/produit1.jpg" },
     { id: 2, name: "Rouge à Lèvres", price: 15, image: "/images/produit2.jpg" },
@@ -64,7 +66,10 @@ const Home = () => {
               </Link>
               <button 
                 className="bg-[#B17973] text-white py-1 px-3 mx-2 mb-2 rounded text-sm hover:bg-[#D7A8A2] transition"
-                onClick={(e) => e.preventDefault()}
+                onClick={(e) => {
+                  e.preventDefault();
+                  addToWishlist(product);
+                }}
               >
                 Ajouter
               </button>

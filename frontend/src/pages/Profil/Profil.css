@@ -131,4 +131,57 @@
     --hover-bg: #3f3b50;
     --shadow: rgba(255, 192, 203, 0.05);
   }
+
+  /* Styles pour les commandes */
+  .commandes-container {
+    margin-top: 20px;
+  }
+
+  .commande-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px var(--shadow);
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .commande-card h3 {
+    margin-top: 0;
+    color: var(--accent);
+    font-size: 18px;
+  }
+
+  .commande-card h4 {
+    margin: 15px 0 8px;
+    color: var(--secondary);
+    font-size: 16px;
+  }
+
+  .commande-card ul {
+    padding-left: 20px;
+    margin: 0;
+  }
+
+  .commande-card li {
+    margin-bottom: 5px;
+    color: var(--text-main);
+  }
+
+  .commande-card p {
+    margin: 5px 0;
+    color: var(--text-main);
+  }
+
+  .profil-loading {
+    text-align: center;
+    color: var(--secondary);
+    font-style: italic;
+    padding: 20px;
+  }
+
+  /* Dark mode spécifique pour les commandes */
+  .profil-container.dark .commande-card {
+    border-color: rgba(255,255,255,0.1);
+  }
   

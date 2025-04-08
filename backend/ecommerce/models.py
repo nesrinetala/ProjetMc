@@ -12,6 +12,7 @@ class Utilisateur(AbstractUser):
     email = models.EmailField(unique=True)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
     telephone = models.CharField(max_length=15, blank=True, null=True)
+    wishlist = models.ManyToManyField('Produit', blank=True)
     
     class Meta:
         verbose_name = "Utilisateur"

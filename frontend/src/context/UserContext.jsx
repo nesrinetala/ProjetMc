@@ -6,13 +6,21 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState({
     nom: "Lana",
     prenom: "Glow",
-    email: "lana@example.com",
+    email: "lana@example.com", 
     telephone: "+33 6 12 34 56 78",
     avatar: "https://i.pravatar.cc/150?img=47",
+    wishlist: []
   });
 
+  const addToWishlist = (product) => {
+    setUser(prevUser => ({
+      ...prevUser,
+      wishlist: [...prevUser.wishlist, product]
+    }));
+  };
+
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, addToWishlist }}>
       {children}
     </UserContext.Provider>
   );
