@@ -1,4 +1,7 @@
-/* Empêche les pages de se couper */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 html, body, #root, .page-container {
   width: 100%;
   min-height: 100vh;

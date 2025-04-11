@@ -1,33 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Reset minimal */
-* {
-  box-sizing: border-box;
-}
-
-/* Styles de base */
-html, body {
-  width: 100%;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-
-/* Navbar fixe */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: #B17973; /* Couleur de votre navbar */
-}
-
-/* Correction pour l'espace sous la navbar */
+/* Styles globaux personnalisés */
 body {
-  padding-top: 83px; /* Hauteur de votre navbar */
+  font-family: 'Inter', system-ui, -apple-system, sans-serif; /* Police personnalisée */
+  line-height: 1.5;
+  color: theme('colors.gray.900'); /* Couleur de texte par défaut */
+  background-color: theme('colors.white'); /* Arrière-plan blanc */
 }
 
-/* Supprimez les autres styles globaux qui pourraient interférer */
+/* Styles pour les liens */
+a {
+  font-weight: 500;
+  color: theme('colors.blue.600'); /* Couleur des liens */
+  text-decoration: inherit;
+}
+a:hover {
+  color: theme('colors.blue.700'); /* Couleur des liens au survol */
+}
+
+/* Styles pour les boutons */
+button {
+  border-radius: theme('borderRadius.lg'); /* Bord arrondi */
+  border: 1px solid transparent;
+  padding: theme('spacing.2') theme('spacing.3'); /* Padding */
+  font-size: theme('fontSize.base'); /* Taille de police */
+  font-weight: 500;
+  font-family: inherit;
+  background-color: theme('colors.gray.100'); /* Fond du bouton */
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: theme('colors.blue.500'); /* Bordure au survol */
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto theme('colors.blue.500'); /* Contour lors du focus */
+}
+
+/* Mode sombre (optionnel) */
+@media (prefers-color-scheme: dark) {
+  body {
+    color: theme('colors.gray.100'); /* Texte clair en mode sombre */
+    background-color: theme('colors.gray.900'); /* Arrière-plan sombre */
+  }
+  a:hover {
+    color: theme('colors.blue.400'); /* Lien au survol en mode sombre */
+  }
+  button {
+    background-color: theme('colors.gray.800'); /* Fond du bouton en mode sombre */
+  }
+}

@@ -13,9 +13,16 @@ import Paiement from "./pages/Paiement/paiement";
 import AddProduct from "./pages/AddProduct/addproduct";
 import TableauDeBord from "./pages/TableauDeBord/TableauDeBord";
 import ProductDetails from "./pages/productDetails/productDetails";
+<<<<<<< Updated upstream
 import EditProfile from "./pages/EditProfile/EditProfile";
 import Commande from "./pages/Commande/Commande";
 import products from "./data/products"; // Importation des produits
+=======
+import ModifierProduit from "./pages/ModifierProduit/ModifierProduit"; // Correction du nom d'import
+import products from "./data/products";
+import ChangePasswordPage from "./pages/ChangePasswordPage/ChangePasswordPage";
+import AjouterProduit from "./pages/AjouterProduit/AjouterProduit";
+>>>>>>> Stashed changes
 
 function Layout() {
   useEffect(() => {
@@ -40,6 +47,9 @@ function Layout() {
 
         <Route path="/header" element={<Header />} />
         <Route path="/productdetails/:id" element={<ProductDetails products={products} />} />
+        <Route path="/changepasswordpage" element={<ChangePasswordPage />}/>
+        <Route path="/ajouter-produit" element={<AjouterProduit />} />
+        <Route path="/modifier-produit/:id" element={<ModifierProduit />} /> {/* Correction ici */}
       </Routes>
     </div>
   );
