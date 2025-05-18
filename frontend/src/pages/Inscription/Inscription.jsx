@@ -1,115 +1,7 @@
-<<<<<<< Updated upstream
-import { useState } from "react";
-import Navbar from "../Navbar/Navbar";
-import { Link } from "react-router-dom";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import "./Inscription.css";
-
-const Inscription = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordErrors, setPasswordErrors] = useState([]);
-
-  const validatePassword = (pwd) => {
-    const errors = [];
-    if (pwd.length < 8) errors.push("Minimum 8 caractères");
-    if (!pwd.match(/[A-Z]/)) errors.push("Au moins une majuscule");
-    if (!pwd.match(/[0-9]/)) errors.push("Au moins un chiffre");
-    if (!pwd.match(/[^A-Za-z0-9]/)) errors.push("Au moins un caractère spécial");
-    return errors;
-  };
-
-  const handlePasswordChange = (e) => {
-    const newPassword = e.target.value;
-    setPassword(newPassword);
-    setPasswordErrors(validatePassword(newPassword));
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-  };
-
-  return (
-    <div className="inscription-container">
-      <Navbar />
-      <div className="inscription-content">
-        <div className="image-section">
-          <img src="/images/cnxhht.png" alt="Bienvenue chez Cosmétiques Beauté" />
-        </div>
-
-        <div className="form-container">
-          <h2>Créer un compte</h2>
-          <form>
-            <input type="text" name="name" placeholder="Nom" required />
-            <input type="email" name="email" placeholder="Email" required />
-            
-            <div className="password-input-container">
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                placeholder="Mot de passe"
-                value={password}
-                onChange={handlePasswordChange}
-                required
-              />
-              <span 
-                className="password-toggle"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
-              </span>
-            </div>
-            
-            {passwordErrors.length > 0 && (
-              <div className="password-requirements">
-                <p>Le mot de passe doit contenir :</p>
-                <ul>
-                  {passwordErrors.map((error, index) => (
-                    <li key={index} className="requirement-item">{error}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            <div className="password-input-container">
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                name="confirm-password"
-                placeholder="Confirmer le mot de passe"
-                value={confirmPassword}
-                onChange={handleConfirmPasswordChange}
-                required
-              />
-              <span 
-                className="password-toggle"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              >
-                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-              </span>
-            </div>
-
-            {confirmPassword && password !== confirmPassword && (
-              <p className="error-message">Les mots de passe ne correspondent pas</p>
-            )}
-
-            <button 
-              type="submit" 
-              disabled={passwordErrors.length > 0 || password !== confirmPassword}
-            >
-              S'inscrire
-            </button>
-          </form>
-          <div className="form-links">
-            <p>
-              Vous avez déjà un compte ? <Link to="/connexion">Se connecter</Link>
-            </p>
-          </div>
-=======
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from 'axios';
 import eyeIcon from "/images/eyee.png";
 import eyeOpenIcon from "/images/eyeO.png";
 import Navbar from "../Navbar/Navbar";
@@ -119,7 +11,7 @@ function Inscription() {
     nom: "",
     email: "",
     typePeau: "",
-    interets: [],
+    telephone: "",
     password: "",
     confirmPassword: "",
   });
@@ -128,10 +20,11 @@ function Inscription() {
     nom: "",
     email: "",
     typePeau: "",
+    telephone: "",  
     password: "",
     confirmPassword: "",
   });
-  
+
   const [validations, setValidations] = useState({
     nom: false,
     email: false,
@@ -143,7 +36,7 @@ function Inscription() {
     },
     confirmPassword: false,
   });
-  
+
   const [touched, setTouched] = useState({
     nom: false,
     email: false,
@@ -155,6 +48,8 @@ function Inscription() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
   const navigate = useNavigate();
 
   // Données du carrousel modernisées
@@ -166,13 +61,13 @@ function Inscription() {
       points: ["Skincare premium", "Maquillage longue tenue", "Conseils experts"]
     },
     {
-      image: "/images/miaou.jpg",
+      image: "/images/inscc.jpg",
       title: "BEAUTÉ CONSCIENTE",
       text: "Des formulations propres qui chouchoutent votre peau",
       points: ["100% vegan", "Sans cruauté", "Éco-responsable"]
     },
     {
-      image: "/images/miaou.jpg",
+      image: "/images/mamama.jpg",
       title: "COMMUNAUTÉ LUXE",
       text: "Rejoignez l'élite des passionnés de beauté",
       points: ["Avant-premières", "Coffrets exclusifs", "Masterclass"]
@@ -187,7 +82,7 @@ function Inscription() {
     return () => clearInterval(interval);
   }, []);
 
-  // Validations (similaires à votre code existant mais adaptées aux nouveaux champs)
+  // Validations
   useEffect(() => {
     if (touched.nom) {
       const isValid = formData.nom.length >= 2;
@@ -228,7 +123,7 @@ function Inscription() {
         lowercase: /[a-z]/.test(formData.password),
         specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(formData.password),
       };
-      
+
       setValidations(prev => ({
         ...prev,
         password: newValidations,
@@ -270,35 +165,68 @@ function Inscription() {
 
   const getInputClass = (name) => {
     const baseClass = "bg-white/10 border-b-2 border-white/20 text-white text-lg p-3 w-full focus:outline-none transition-all duration-300 placeholder-white/40";
-    
+
     if (!touched[name]) {
       return `${baseClass} focus:border-rose-300`;
     }
-    
+
     if (errors[name]) {
       return `${baseClass} border-red-400 focus:border-red-400`;
     }
-    
+
     return `${baseClass} border-green-400 focus:border-green-400`;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const allTouched = Object.keys(formData).reduce((acc, key) => {
-      acc[key] = true;
-      return acc;
-    }, {});
-    setTouched(allTouched);
-
-    const isValid = Object.values(validations).every(v => 
-      typeof v === 'object' ? Object.values(v).every(x => x) : v
-    );
-
-    if (isValid) {
-      console.log("Inscription réussie avec :", formData);
-      setTimeout(() => {
-        navigate("/");
-      }, 500);
+    setApiError("");
+    
+    // Conversion des noms de champs pour correspondre au backend
+    const userData = {
+      username: formData.nom,
+      email: formData.email,
+      password: formData.password,
+      password_confirmation: formData.confirmPassword,
+      telephone: formData.telephone,
+      skin_type: formData.typePeau
+    };
+  
+    console.log("Données envoyées:", userData); // Pour débogage
+  
+    try {
+      // Suppression de la variable response inutilisée
+      await axios.post('http://localhost:8000/api/inscription/', userData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      navigate("/connexion");
+    } catch (err) {
+      console.error("Erreur complète:", err.response?.data);
+      
+      // Meilleure gestion des erreurs
+      let errorMessage = "Erreur lors de l'inscription";
+      
+      if (err.response?.data) {
+        // Traitement des différentes formes d'erreurs possibles
+        if (typeof err.response.data === 'string') {
+          errorMessage = err.response.data;
+        } else if (err.response.data.detail) {
+          errorMessage = err.response.data.detail;
+        } else if (typeof err.response.data === 'object') {
+          // Prend le premier message d'erreur disponible
+          const firstErrorKey = Object.keys(err.response.data)[0];
+          if (firstErrorKey) {
+            errorMessage = `${firstErrorKey}: ${err.response.data[firstErrorKey][0]}`;
+          }
+        }
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+      
+      setApiError(errorMessage);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -307,7 +235,7 @@ function Inscription() {
       <Navbar/>
       <div className="fixed inset-0 overflow-y-auto">
         <div className="flex min-h-screen items-center justify-center p-4 pt-24">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
@@ -339,7 +267,7 @@ function Inscription() {
                             className="w-full h-full object-cover object-center"
                           />
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
@@ -347,20 +275,20 @@ function Inscription() {
                           className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end pb-16 px-12 text-center"
                         >
                           <motion.h3
-  initial={{ y: 50, opacity: 0 }}
-  animate={{ y: 0, opacity: 1 }}
-  transition={{ delay: 0.8, duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
-  className="text-3xl lg:text-4xl font-bold text-white mb-4 font-['Playfair_Display'] tracking-wide leading-tight"
->
-  {slide.title}
-  <motion.span
-    initial={{ scaleX: 0 }}
-    animate={{ scaleX: 1 }}
-    transition={{ delay: 1.2, duration: 1.2, ease: [0.2, 0.8, 0.2, 1] }}
-    className="block w-1/4 h-1 bg-rose-400 mx-auto mt-4 origin-center"
-  />
-</motion.h3>
-                          
+                            initial={{ y: 50, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.8, duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
+                            className="text-3xl lg:text-4xl font-bold text-white mb-4 font-['Playfair_Display'] tracking-wide leading-tight"
+                          >
+                            {slide.title}
+                            <motion.span
+                              initial={{ scaleX: 0 }}
+                              animate={{ scaleX: 1 }}
+                              transition={{ delay: 1.2, duration: 1.2, ease: [0.2, 0.8, 0.2, 1] }}
+                              className="block w-1/4 h-1 bg-rose-400 mx-auto mt-4 origin-center"
+                            />
+                          </motion.h3>
+
                           <motion.p
                             initial={{ y: 30, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
@@ -449,6 +377,22 @@ function Inscription() {
                 Créer un compte
               </motion.h2>
               
+              {/* Affichage des erreurs d'API */}
+              {apiError && (
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-6 p-3 bg-red-500/20 border border-red-400/50 rounded-lg"
+                >
+                  <p className="text-red-100 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    </svg>
+                    {apiError}
+                  </p>
+                </motion.div>
+              )}
+              
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Nom */}
                 <motion.div 
@@ -489,49 +433,6 @@ function Inscription() {
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                       Nom valide
-                    </motion.p>
-                  )}
-                </motion.div>
-
-                {/* Prénom */}
-                <motion.div 
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="space-y-2"
-                >
-                  <label className="block text-white text-lg font-medium">Prénom</label>
-                  <input
-                    type="text"
-                    name="prenom"
-                    value={formData.prenom}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    className={getInputClass("prenom")}
-                    placeholder="Votre prénom"
-                  />
-                  {errors.prenom && (
-                    <motion.p 
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="mt-1 text-sm text-red-300 flex items-center"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                      </svg>
-                      {errors.prenom}
-                    </motion.p>
-                  )}
-                  {validations.prenom && !errors.prenom && (
-                    <motion.p 
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="mt-1 text-sm text-green-300 flex items-center"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      Prénom valide
                     </motion.p>
                   )}
                 </motion.div>
@@ -578,6 +479,55 @@ function Inscription() {
                   )}
                 </motion.div>
 
+                {/* Type de peau */}
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.65 }}
+                  className="space-y-2"
+                >
+                  <label className="block text-white text-lg font-medium">Type de peau</label>
+                  <select
+                    name="typePeau"
+                    value={formData.typePeau}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    className={getInputClass("typePeau") + " cursor-pointer"}
+                  >
+                    <option value="">Sélectionnez votre type de peau</option>
+                    <option value="seche">Sèche</option>
+                    <option value="grasse">Grasse</option>
+                    <option value="mixte">Mixte</option>
+                    <option value="normale">Normale</option>
+                    <option value="sensible">Sensible</option>
+                  </select>
+                  {errors.typePeau && (
+                    <motion.p 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="mt-1 text-sm text-red-300 flex items-center"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                      </svg>
+                      {errors.typePeau}
+                    </motion.p>
+                  )}
+                </motion.div>
+
+                {/*Ajoutez le champ téléphone dans votre formulaire*/}
+<motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }} className="space-y-2">
+  <label className="block text-white text-lg font-medium">Téléphone</label>
+  <input
+    type="tel"
+    name="telephone"
+    value={formData.telephone}
+    onChange={handleInputChange}
+    onBlur={handleBlur}
+    className={getInputClass("telephone")}
+    placeholder="Votre numéro de téléphone"
+  />
+</motion.div>
                 {/* Mot de passe */}
                 <motion.div 
                   initial={{ opacity: 0, x: -20 }}
@@ -642,7 +592,7 @@ function Inscription() {
                           </svg>
                         ) : null}
                       </span>
-                      Au moins 10 caractères
+                      Au moins 8 caractères
                     </li>
                     <li className={`flex items-center ${validations.password.lowercase ? 'text-green-300' : 'text-white/50'}`}>
                       <span className={`inline-flex items-center justify-center w-5 h-5 mr-2 rounded-full ${validations.password.lowercase ? 'bg-green-500/20' : 'bg-white/10'}`}>
@@ -734,11 +684,22 @@ function Inscription() {
                 >
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white p-4 rounded-lg hover:from-blue-700 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 shadow-lg font-bold text-lg"
+                    whileHover={{ scale: isLoading ? 1 : 1.02 }}
+                    whileTap={{ scale: isLoading ? 1 : 0.98 }}
+                    disabled={isLoading}
+                    className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white p-4 rounded-lg hover:from-blue-700 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 shadow-lg font-bold text-lg relative"
                   >
-                    S'inscrire
+                    {isLoading ? (
+                      <div className="flex items-center justify-center">
+                        <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Inscription en cours...
+                      </div>
+                    ) : (
+                      "S'inscrire"
+                    )}
                   </motion.button>
                 </motion.div>
 
@@ -761,7 +722,6 @@ function Inscription() {
               </form>
             </div>
           </motion.div>
->>>>>>> Stashed changes
         </div>
       </div>
     </div>

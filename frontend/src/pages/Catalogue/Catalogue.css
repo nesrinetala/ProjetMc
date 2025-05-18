@@ -1,14 +1,15 @@
-/* Styles généraux */
 .container {
-  width: 100% !important; /* Prend toute la largeur de l'écran */
-  max-width: 100% !important; /* Supprime toute limite de largeur */
-  margin: 0; /* Supprime tout espace autour */
-  padding: 20px; /* Garde un peu d'espace intérieur */
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0;
+  padding: 20px;
   text-align: center;
-  background-color: #181818;
-  border-radius: 10px;
+  background-color: #fdfbf7; /* Light background */
+  border-radius: 12px;
+  font-family: 'Segoe UI', sans-serif;
   margin-top: 20px;
 }
+
 /* Section de filtre */
 .filter-section {
   display: flex;
@@ -21,23 +22,24 @@
 .filter-button {
   padding: 10px 15px;
   border: none;
-  background-color: #6E5E52; /* Taupe foncé */
-  color: #F0EDE5;
+  background-color: #c0af8b; /* Beige accent */
+  color: white;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 12px;
   font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .filter-button:hover {
-  background-color: #3D3D3D; /* Gris anthracite */
+  background-color: #7d6d5e; /* Darker beige on hover */
 }
 
 .filter-select {
   padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #3D3D3D; /* Gris anthracite */
-  background-color: #D5C7BC; /* Beige doux */
-  color: #181818; /* Noir profond */
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #444;
   font-weight: bold;
 }
 
@@ -48,7 +50,7 @@
 }
 
 .catalogue h2 {
-  color: #F0EDE5; /* Blanc cassé */
+  color: #94816e; /* Beige/brown accent */
 }
 
 .search-bar {
@@ -59,24 +61,29 @@
 .search-bar input {
   padding: 8px;
   width: 200px;
-  border: 1px solid #3D3D3D; /* Gris anthracite */
-  border-radius: 5px;
-  background-color: #D5C7BC; /* Beige doux */
-  color: #181818; /* Noir profond */
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: white;
+  color: #444;
   margin-right: 12px;
 }
 
 .search-bar button {
   padding: 10px 20px;
-  background-color: #6E5E52; /* Taupe foncé */
-  color: #F0EDE5;
+  background-color: #c0af8b;
+  color: white;
   width: auto;
   min-width: 120px;
   max-width: 200px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .search-bar button:hover {
-  background-color: #3D3D3D; /* Gris anthracite */
+  background-color: #7d6d5e;
 }
 
 /* Section des produits */
@@ -85,7 +92,8 @@
 }
 
 .popular-products h2 {
-  color: #F0EDE5; /* Blanc cassé */
+  color: #94816e;
+  margin-bottom: 20px;
 }
 
 .product-grid {
@@ -97,41 +105,43 @@
 }
 
 .product-card {
-  background-color: #D5C7BC; /* Beige doux */
+  background-color: white;
   padding: 15px;
-  border-radius: 5px;
+  border-radius: 12px;
   text-align: center;
   width: 180px;
-  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .product-card img {
   width: 100%;
   height: auto;
-  border-radius: 5px;
+  border-radius: 12px;
 }
 
 .product-card h3 {
-  color: #181818; /* Noir profond */
+  color: #444;
 }
 
 .product-card p {
-  color: #3D3D3D; /* Gris anthracite */
+  color: #94816e;
 }
 
 .product-card button {
   margin-top: 10px;
   padding: 8px;
   border: none;
-  background-color: #6E5E52; /* Taupe foncé */
-  color: #F0EDE5;
+  background-color: #c0af8b;
+  color: white;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 12px;
   font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .product-card button:hover {
-  background-color: #3D3D3D; /* Gris anthracite */
+  background-color: #7d6d5e;
 }
 
 /* Footer */
@@ -139,7 +149,8 @@ footer {
   margin-top: 20px;
   text-align: center;
   padding: 10px;
-  background-color: #3D3D3D; /* Gris anthracite */
-  color: #F0EDE5; /* Blanc cassé */
-  border-radius: 5px;
+  background-color: white;
+  color: #444;
+  border-radius: 12px;
+  font-family: 'Segoe UI', sans-serif;
 }

@@ -1,97 +1,12 @@
-<<<<<<< Updated upstream
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { FaTimes, FaEye, FaEyeSlash } from "react-icons/fa";
-=======
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from 'axios';
+import { useAuth } from "../Navbar/AuthContext";
 import eyeIcon from "/images/eyee.png";
 import eyeOpenIcon from "/images/eyeO.png";
->>>>>>> Stashed changes
 import Navbar from "../Navbar/Navbar";
 
-<<<<<<< Updated upstream
-const Connexion = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
-  const validatePassword = (pwd) => {
-    if (pwd.length < 8) {
-      return "Le mot de passe doit contenir au moins 8 caractères";
-    }
-    return "";
-  };
-
-  const handlePasswordChange = (e) => {
-    const newPassword = e.target.value;
-    setPassword(newPassword);
-    setPasswordError(validatePassword(newPassword));
-  };
-
-  return (
-    <div className="connexion-container">
-      <Navbar />
-      <div className="connexion-content">
-        <div className="image-section">
-          <img src="/images/nyah.png" alt="Bienvenue chez Cosmétiques Beauté" />
-        </div>
-
-        <div className="form-container">
-          <h2>Se connecter</h2>
-          <form>
-            <input type="email" name="email" placeholder="Email" required />
-            
-            <div className="password-input-container">
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                placeholder="Mot de passe"
-                value={password}
-                onChange={handlePasswordChange}
-                required
-              />
-              <span 
-                className="password-toggle"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
-              </span>
-            </div>
-            
-            {passwordError && (
-              <p className="error-message">{passwordError}</p>
-            )}
-
-            <button type="submit">Se connecter</button>
-          </form>
-          <div className="form-links">
-            <p>Pas encore de compte ? <Link to="/Inscription">Créer un compte</Link></p>
-            <p>
-              <a className="forgot-password-btn" onClick={() => setShowModal(true)}>Mot de passe oublié ?</a>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <footer>
-        <p>&copy; 2025 Cosmétiques Beauté. Tous droits réservés.</p>
-      </footer>
-
-      {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <FaTimes className="close-icon" onClick={() => setShowModal(false)} />
-            <h2>Réinitialiser le mot de passe</h2>
-            <p>Entrez votre email pour recevoir un lien de réinitialisation.</p>
-            <input type="email" name="reset-email" placeholder="Votre email" required />
-            <button>Envoyer</button>
-          </div>
-        </div>
-      )}
-=======
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -100,7 +15,10 @@ function Login() {
   const [emailSuccess, setEmailSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [authError, setAuthError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   // Données du carrousel beauté
   const carouselData = [
@@ -111,13 +29,13 @@ function Login() {
       points: ["Soins", "Maquillage", "Accessoires"]
     },
     {
-      image: "/images/nyah.png",
+      image: "/images/connexion.jpg",
       title: "Exclusivités et nouveautés",
       text: "Soyez la première à tester nos dernières innovations",
       points: ["Tendances", "Limited Edition", "Nouveautés"]
     },
     {
-      image: "/images/nyah.png",
+      image: "/images/bababa.jpg",
       title: "Conseils d'experts",
       text: "Profitez des conseils de nos spécialistes beauté",
       points: ["Personnalisé", "Professionnel", "Adapté"]
@@ -129,9 +47,8 @@ function Login() {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % carouselData.length);
     }, 8000);
-
     return () => clearInterval(interval);
-  }, []);
+  }, [carouselData.length]);
 
   // Validation de l'email
   useEffect(() => {
@@ -145,45 +62,66 @@ function Login() {
     }
   }, [email]);
 
-  const handleSubmit = (e) => {
+  // Soumission du formulaire
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Validation finale
-    let isValid = true;
-    
+    setAuthError("");
+    setPasswordError("");
+
     if (!email) {
-      setEmailError("L'email est requis");
-      isValid = false;
-    } else if (!emailSuccess) {
-      setEmailError("Format email invalide");
-      isValid = false;
-    }
-    
-    if (!password) {
-      setPasswordError("Le mot de passe est requis");
-      isValid = false;
-    } else {
-      setPasswordError("");
+      setEmailError("Email requis");
+      return;
     }
 
-    if (isValid) {
-      console.log("Connexion réussie avec:", { email, password });
-      setTimeout(() => {
-        navigate("/");
-      }, 500);
+    if (!password) {
+      setPasswordError("Mot de passe requis");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post('http://localhost:8000/api/connexion/', {
+        email,
+        username: email,
+        password
+      }, {
+        withCredentials: true,
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      login({
+        email: response.data.email,
+        username: response.data.username,
+      });
+
+      navigate("/");
+    } catch (err) {
+      let errorMessage = "Erreur de connexion";
+      if (err.response) {
+        if (err.response.status === 401) {
+          errorMessage = "Email ou mot de passe incorrect";
+          setPasswordError("Mot de passe incorrect");
+        } else if (err.response.data?.detail) {
+          errorMessage = err.response.data.detail;
+        }
+      }
+      setAuthError(errorMessage);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div>
+    <div className="font-sans">
       <Navbar/>
-      <div className="fixed inset-0 overflow-y-auto">
-        <div className="flex min-h-screen items-center justify-center p-4 mt-20">
+      <div className="fixed inset-0 overflow-y-auto pt-16 bg-[#F5F0E6]">
+        <div className="flex min-h-screen items-center justify-center p-4">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="flex flex-col lg:flex-row w-full max-w-6xl bg-white/10 rounded-2xl shadow-2xl border border-white/30 backdrop-blur-lg overflow-hidden"
+            className="flex flex-col lg:flex-row w-full max-w-6xl bg-[#E8D5C9] rounded-2xl shadow-lg border border-[#D7A8A2] overflow-hidden"
           >
             {/* Partie formulaire */}
             <div className="w-full lg:w-1/2 p-8 lg:p-10">
@@ -191,11 +129,42 @@ function Login() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="text-3xl font-bold text-center text-white mb-8"
+                className="text-3xl font-bold text-center text-[#B17973] mb-8"
               >
                 Connexion Beauté
               </motion.h2>
               
+              {/* Message d'erreur d'authentification */}
+              {authError && (
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-6 p-3 bg-[#B17973]/20 border border-[#B17973]/50 rounded-lg"
+                >
+                  <p className="text-[#5A4A42] flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    </svg>
+                    {authError}
+                  </p>
+                </motion.div>
+              )}
+              
+              {isLoading && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="flex justify-center mb-4"
+                >
+                  <motion.div
+                    className="w-8 h-8 border-4 border-[#B17973] border-t-transparent rounded-full animate-spin"
+                    animate={{ rotate: 360 }}
+                    transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                  />
+                </motion.div>
+              )}
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <motion.div 
                   initial={{ opacity: 0, x: -20 }}
@@ -203,17 +172,17 @@ function Login() {
                   transition={{ delay: 0.4 }}
                   className="space-y-2"
                 >
-                  <label className="block text-white text-lg font-medium">Email</label>
+                  <label className="block text-[#5A4A42] text-lg font-medium">Email</label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className={`bg-white/20 p-3 rounded-lg w-full focus:outline-none border-2 ${
+                    className={`bg-white/80 p-3 rounded-lg w-full focus:outline-none border-2 ${
                       emailError 
-                        ? "border-red-400 text-red-100 placeholder-red-300 focus:ring-red-300 focus:border-red-400" 
+                        ? "border-[#B17973] text-[#5A4A42] placeholder-[#B17973] focus:ring-[#B17973] focus:border-[#B17973]" 
                         : emailSuccess 
-                          ? "border-green-400 text-green-100 placeholder-green-300 focus:ring-green-300 focus:border-green-400" 
-                          : "border-white/30 text-white placeholder-white/50 focus:ring-pink-300 focus:border-pink-400"
+                          ? "border-[#8C6A5D] text-[#5A4A42] placeholder-[#8C6A5D] focus:ring-[#8C6A5D] focus:border-[#8C6A5D]" 
+                          : "border-[#D7A8A2] text-[#5A4A42] placeholder-[#8C6A5D] focus:ring-[#B17973] focus:border-[#B17973]"
                     } transition-all duration-200`}
                     placeholder="votre@email.com"
                   />
@@ -221,7 +190,7 @@ function Login() {
                     <motion.p 
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="mt-1 text-sm text-red-300 flex items-center"
+                      className="mt-1 text-sm text-[#B17973] flex items-center"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
@@ -232,7 +201,7 @@ function Login() {
                     <motion.p 
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="mt-1 text-sm text-green-300 flex items-center"
+                      className="mt-1 text-sm text-[#8C6A5D] flex items-center"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
@@ -248,12 +217,12 @@ function Login() {
                   transition={{ delay: 0.5 }}
                   className="space-y-2"
                 >
-                  <label className="block text-white text-lg font-medium">Mot de passe</label>
+                  <label className="block text-[#5A4A42] text-lg font-medium">Mot de passe</label>
                   <div className="relative">
                     <input
                       id="password"
                       type={showPassword ? "text" : "password"}
-                      className="w-full p-3 pr-12 bg-white/10 border-2 border-white/30 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all"
+                      className="w-full p-3 pr-12 bg-white/80 border-2 border-[#D7A8A2] rounded-xl text-[#5A4A42] focus:outline-none focus:ring-2 focus:ring-[#B17973] focus:border-[#B17973] transition-all"
                       placeholder="••••••••"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
@@ -262,7 +231,7 @@ function Login() {
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="pointer-events-auto text-white/70 hover:text-white transition duration-200 bg-transparent p-1 hover:bg-transparent"
+                        className="pointer-events-auto text-[#8C6A5D] hover:text-[#B17973] transition duration-200 bg-transparent p-1 hover:bg-transparent"
                         aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
                       >
                         <img 
@@ -277,7 +246,7 @@ function Login() {
                     <motion.p 
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="mt-1 text-sm text-red-300 flex items-center"
+                      className="mt-1 text-sm text-[#B17973] flex items-center"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
@@ -295,11 +264,22 @@ function Login() {
                 >
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full bg-gradient-to-r from-pink-600 to-pink-500 text-white p-4 rounded-lg hover:from-pink-700 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition-all duration-300 shadow-lg font-bold text-lg"
+                    whileHover={{ scale: isLoading ? 1 : 1.02 }}
+                    whileTap={{ scale: isLoading ? 1 : 0.98 }}
+                    disabled={isLoading}
+                    className="w-full bg-[#B17973] text-white p-4 rounded-lg hover:bg-[#D7A8A2] focus:outline-none focus:ring-2 focus:ring-[#B17973] focus:ring-offset-2 transition-all duration-300 shadow-lg font-bold text-lg relative"
                   >
-                    Se connecter
+                    {isLoading ? (
+                      <div className="flex items-center justify-center">
+                        <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Connexion en cours...
+                      </div>
+                    ) : (
+                      "Se connecter"
+                    )}
                   </motion.button>
                 </motion.div>
 
@@ -309,11 +289,11 @@ function Login() {
                   transition={{ delay: 0.7 }}
                   className="text-center pt-4"
                 >
-                  <p className="text-white/70">
+                  <p className="text-[#8C6A5D]">
                     Pas encore de compte?{' '}
                     <Link
                       to="/inscription"
-                      className="font-medium text-pink-300 hover:text-pink-200 transition-colors"
+                      className="font-medium text-[#B17973] hover:text-[#D7A8A2] transition-colors"
                     >
                       Créer un compte
                     </Link>
@@ -322,9 +302,9 @@ function Login() {
               </form>
             </div>
 
-            {/* Partie carrousel beauté avec animations */}
+            {/* Partie carrousel beauté */}
             <div className="w-full lg:w-1/2 p-0 relative h-[70vh] lg:h-auto flex">
-              <div className="relative w-full h-full overflow-hidden bg-black/20">
+              <div className="relative w-full h-full overflow-hidden bg-[#5A4A42]/20">
                 <AnimatePresence mode="wait">
                   {carouselData.map((slide, index) => (
                     currentSlide === index && (
@@ -355,7 +335,7 @@ function Login() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.5, duration: 0.8 }}
-                          className="absolute inset-0 flex flex-col items-center justify-end pb-12 text-center bg-gradient-to-t from-black/70 via-black/50 to-transparent"
+                          className="absolute inset-0 flex flex-col items-center justify-end pb-12 text-center bg-gradient-to-t from-[#5A4A42]/70 via-[#5A4A42]/50 to-transparent"
                         >
                           <motion.h3
                             initial={{ opacity: 0 }}
@@ -368,7 +348,7 @@ function Login() {
                               initial={{ scaleX: 0 }}
                               animate={{ scaleX: 1 }}
                               transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
-                              className="absolute bottom-0 left-0 w-full h-0.5 bg-pink-400 origin-left"
+                              className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B17973] origin-left"
                             />
                           </motion.h3>
                           
@@ -412,8 +392,8 @@ function Login() {
                               >
                                 <motion.div 
                                   className={`w-2 h-2 rounded-full ${
-                                    i === 0 ? 'bg-pink-400' : 
-                                    i === 1 ? 'bg-purple-400' : 'bg-rose-400'
+                                    i === 0 ? 'bg-[#B17973]' : 
+                                    i === 1 ? 'bg-[#8C6A5D]' : 'bg-[#D7A8A2]'
                                   } mr-2`}
                                   initial={{ scale: 0 }}
                                   animate={{ scale: 1 }}
@@ -443,7 +423,7 @@ function Login() {
                       key={index}
                       onClick={() => setCurrentSlide(index)}
                       className={`w-3 h-3 rounded-full ${
-                        currentSlide === index ? 'bg-white' : 'bg-white/40'
+                        currentSlide === index ? 'bg-[#B17973]' : 'bg-[#B17973]/40'
                       }`}
                       initial={{ scale: 0.8 }}
                       animate={{ 
@@ -460,7 +440,6 @@ function Login() {
           </motion.div>
         </div>
       </div>
->>>>>>> Stashed changes
     </div>
   );
 }

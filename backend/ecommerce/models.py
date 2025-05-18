@@ -10,31 +10,31 @@ class Utilisateur(AbstractUser):
         ('visiteur', 'Visiteur'),
     ]
     email = models.EmailField(unique=True)
-    role = models.CharField(max_length=20, choices=ROLE_CHOICES)
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='client_vendeur')
     telephone = models.CharField(max_length=15, blank=True, null=True)
-    wishlist = models.ManyToManyField('Produit', blank=True)
     
     class Meta:
         verbose_name = "Utilisateur"
-
-class Administrateur(Utilisateur):
-    class Meta:
-        proxy = True  # N'a pas sa propre table en base
-
-    def gerer_clients(self):
-        pass  # Implémentez la logique ici
-
-    def gerer_produits(self):
-        pass
 
 class ClientVendeur(Utilisateur):
     adresse = models.TextField()
     solde = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     
-    def passer_commande(self):
+    class Meta:
+        proxy = False
+
+    def save(self, *args, **kwargs):
+        self.role = 'client_vendeur'
+        super().save(*args, **kwargs)
+
+class Administrateur(Utilisateur):
+    class Meta:
+        proxy = True
+
+    def gerer_clients(self):
         pass
 
-    def vendre_produit(self):
+    def gerer_produits(self):
         pass
 
 # === MODÈLES CATALOGUE ===
@@ -45,13 +45,20 @@ class Categorie(models.Model):
         return self.nom
 
 class Produit(models.Model):
-    nom = models.CharField(max_length=100)
+    vendeur = models.ForeignKey(ClientVendeur, on_delete=models.CASCADE)
+    nom = models.CharField(max_length=255)
     description = models.TextField()
     prix = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
-    stock = models.IntegerField(validators=[MinValueValidator(0)])
     categorie = models.ForeignKey(Categorie, on_delete=models.SET_NULL, null=True)
-    vendeur = models.ForeignKey(ClientVendeur, on_delete=models.CASCADE)
-    
+    image = models.ImageField(upload_to='produits/')
+    stock = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    ingredients = models.TextField()
+    mode_emploi = models.TextField()
+    date_creation = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.nom
+
     def mettre_a_jour_stock(self, quantite):
         self.stock += quantite
         self.save()
@@ -67,7 +74,7 @@ class Panier(models.Model):
     utilisateur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE, null=True, blank=True)
     est_anonyme = models.BooleanField(default=False)
     session_id = models.CharField(max_length=100, blank=True)
-    
+
     def calculer_total(self):
         return sum(ligne.prix_unitaire * ligne.quantite for ligne in self.lignes.all())
 
@@ -107,17 +114,29 @@ class Livraison(models.Model):
     type = models.CharField(max_length=50)
     statut = models.CharField(max_length=50)
 
+# === MODÈLE HISTORIQUE ===
 class HistoriqueConsultation(models.Model):
     utilisateur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
     produit = models.ForeignKey(Produit, on_delete=models.CASCADE)
     date_consultation = models.DateTimeField(auto_now_add=True)
     
     class Meta:
-        unique_together = ('utilisateur', 'produit')  # Évite les doublons
+        unique_together = ('utilisateur', 'produit')
 
 class Visiteur(Utilisateur):
     class Meta:
         proxy = True
-    
+
     def ajouter_au_panier(self):
-        pass  # Implémentez la logique ici
+        pass
+
+# === MODÈLE PROFIL ===
+class Profile(models.Model):
+    user = models.OneToOneField(Utilisateur, on_delete=models.CASCADE, related_name='profile')
+    skin_type = models.CharField(max_length=50, choices=[
+        ('seche', 'Sèche'),
+        ('grasse', 'Grasse'), 
+        ('mixte', 'Mixte'),
+        ('normale', 'Normale'),
+        ('sensible', 'Sensible')
+    ])

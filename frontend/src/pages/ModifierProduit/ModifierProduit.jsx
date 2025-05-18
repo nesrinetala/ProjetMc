@@ -53,7 +53,7 @@ export default function ModifierProduit() {
   if (!product) return <div className="text-center py-20">Chargement...</div>;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white mt-11">
       <Navbar />
       
       <div className="max-w-4xl mx-auto px-4 py-12">

@@ -1,0 +1,94 @@
+
+/* Info page (adjustments) */
+.form-container {
+  max-width: 700px;
+  margin: auto;
+  padding: 30px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.step {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #c0af8b;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.step-line {
+  width: 60px;
+  height: 3px;
+  background: #4A6A89;
+}
+
+.step.active {
+  background: #557a46;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #94816e;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #444;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #444;  /* Assurer que le texte soit lisible */
+}
+
+.form-group select {
+  background-color: #fff;  /* Assurer que le fond soit bien blanc */
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #94816e;  /* Couleur de la bordure au focus */
+  outline: none;
+}
+
+.submit-button {
+  background: #94816e;
+  color: rgb(255, 255, 255);
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  width: 100%;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-button:hover {
+  background: #7d6d5e;
+}
