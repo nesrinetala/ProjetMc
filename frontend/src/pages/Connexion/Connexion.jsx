@@ -63,54 +63,65 @@ function Login() {
   }, [email]);
 
   // Soumission du formulaire
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
     setAuthError("");
     setPasswordError("");
 
     if (!email) {
-      setEmailError("Email requis");
-      return;
+        setEmailError("Email requis");
+        return;
     }
 
     if (!password) {
-      setPasswordError("Mot de passe requis");
-      return;
+        setPasswordError("Mot de passe requis");
+        return;
     }
 
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8000/api/connexion/', {
-        email,
-        username: email,
-        password
-      }, {
-        withCredentials: true,
-        headers: { 'Content-Type': 'application/json' }
-      });
+        const response = await axios.post('http://localhost:8000/api/connexion/', {
+            email,
+            password
+        }, {
+            withCredentials: true,
+            headers: { 'Content-Type': 'application/json' }
+        });
 
-      login({
-        email: response.data.email,
-        username: response.data.username,
-      });
+        // Vérification du rôle
+        const { email: userEmail, username, role } = response.data;
 
-      navigate("/");
-    } catch (err) {
-      let errorMessage = "Erreur de connexion";
-      if (err.response) {
-        if (err.response.status === 401) {
-          errorMessage = "Email ou mot de passe incorrect";
-          setPasswordError("Mot de passe incorrect");
-        } else if (err.response.data?.detail) {
-          errorMessage = err.response.data.detail;
+        login({
+            email: userEmail,
+            username: username,
+            role: role,  // Stocke le rôle dans le contexte
+        });
+
+        // Redirection basée sur le rôle
+        if (role === 'admin') {
+            navigate('/dashbordadmin');  // Chemin vers le dashboard admin
+        } else {
+            navigate('/');  // Page d'accueil pour les autres utilisateurs
         }
-      }
-      setAuthError(errorMessage);
+
+    } catch (err) {
+        let errorMessage = "Erreur de connexion";
+        if (err.response) {
+            if (err.response.status === 401) {
+                errorMessage = "Email ou mot de passe incorrect";
+                setPasswordError("Mot de passe incorrect");
+            } else if (err.response.data?.detail) {
+                errorMessage = err.response.data.detail;
+            }
+        }
+        setAuthError(errorMessage);
     } finally {
-      setIsLoading(false);
+        setIsLoading(false);
     }
-  };
+};
+
+
 
   return (
     <div className="font-sans">

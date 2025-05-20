@@ -42,7 +42,8 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/produits/accueil/');
+        const response = await (axios.get("http://localhost:8000/api/products")
+);
         setProducts(response.data);
       } catch (error) {
         console.error("Erreur lors du chargement des produits", error);

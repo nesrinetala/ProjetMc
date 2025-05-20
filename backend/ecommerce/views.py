@@ -16,12 +16,36 @@ from .models import Produit
 from .serializers import ProduitSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
 import json
-
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+# Dans votre views.py (Django)
+from django.http import JsonResponse
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status  
 from .serializers import (
     InscriptionClientVendeurSerializer,
     WishlistSerializer
 )
 from django.middleware.csrf import get_token
+
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.shortcuts import render
+
+def is_admin(user):
+    return user.role == 'admin'
+
+@login_required
+@user_passes_test(is_admin)
+def dashbordadmin(request):
+    return render(request, 'dashbordadmin.jsx')
+
+
 
 import logging
 logger = logging.getLogger(__name__)
@@ -70,22 +94,15 @@ def connexion_client_vendeur(request):
                 status=status.HTTP_401_UNAUTHORIZED
             )
         
-        # Ajoutez cette ligne pour créer la session
         auth_login(request, user)
         
         return Response({
             'user_id': user.id,
             'username': user.username,
             'email': user.email,
-            'sessionid': request.session.session_key  # Important pour le debug
+            'role': user.role,  # Ajout du rôle dans la réponse
+            'sessionid': request.session.session_key
         })
-        
-    except Exception as e:
-        logger.error(f"Erreur de connexion: {str(e)}", exc_info=True)
-        return Response(
-            {'detail': 'Erreur interne du serveur'},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
         
     except Exception as e:
         logger.error(f"Erreur de connexion: {str(e)}", exc_info=True)
@@ -99,12 +116,6 @@ def logout_view(request):
     logout(request)
     return Response({'success': True})
 
-# Dans votre views.py (Django)
-from django.http import JsonResponse
-from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
-from django.views.decorators.http import require_http_methods
-from django.views.decorators.csrf import csrf_exempt
-import json
 
 @api_view(['GET'])
 def check_auth(request):
@@ -209,14 +220,50 @@ def ajouter_produit(request):
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-@api_view(['GET'])
-def produits_accueil(request):
-    produits = Produit.objects.all().order_by('-date_creation')[:5]  # 5 derniers produits
-    serializer = ProduitSerializer(produits, many=True)
-    return Response(serializer.data)
 
-@api_view(['GET'])
-def produits_catalogue(request):
-    produits = Produit.objects.all()
-    serializer = ProduitSerializer(produits, many=True)
-    return Response(serializer.data)
+
+@api_view(['POST'])
+def connexion_utilisateur(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    try:
+        user = Utilisateur.objects.get(email=email)
+        if user.check_password(password):
+            # Gérer la connexion et retourner le token JWT
+            return Response({"message": "Connexion réussie"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "Mot de passe incorrect"}, status=status.HTTP_401_UNAUTHORIZED)
+    except Utilisateur.DoesNotExist:
+        return Response({"error": "Utilisateur non trouvé"}, status=status.HTTP_404_NOT_FOUND)
+
+
+
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        # Validation basique des entrées
+        if not username or not password:
+            return Response(
+                {'error': 'Nom d\'utilisateur et mot de passe requis'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            auth_login(request, user)
+            return Response({
+                'message': 'Connexion réussie',
+                'role': user.role,
+                'email': user.email,
+                'username': user.username,
+                'user_id': user.id  # Ajout recommandé
+            }, status=status.HTTP_200_OK)
+        else:
+            return Response(
+                {'error': 'Nom d\'utilisateur ou mot de passe invalide'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )

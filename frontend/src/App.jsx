@@ -54,8 +54,7 @@ function Layout() {
         <Route path="/addproduct" element={<AddProduct />} />
         <Route path="/ajouter-produit" element={<AjouterProduit />} />
         <Route path="/modifier-produit/:id" element={<ModifierProduit />} />
-        <Route path="/dashbord-admin" element={<DashbordAdmin />} />
-        
+         <Route path="/dashbordadmin" element={<DashbordAdmin />} />
         {/* Other Routes */}
         <Route path="/header" element={<Header />} />
         <Route path="/chatbot" element={<Chatbot />} />

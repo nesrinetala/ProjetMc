@@ -10,7 +10,6 @@ function Inscription() {
   const [formData, setFormData] = useState({
     nom: "",
     email: "",
-    typePeau: "",
     telephone: "",
     password: "",
     confirmPassword: "",
@@ -19,7 +18,6 @@ function Inscription() {
   const [errors, setErrors] = useState({
     nom: "",
     email: "",
-    typePeau: "",
     telephone: "",  
     password: "",
     confirmPassword: "",
@@ -28,7 +26,6 @@ function Inscription() {
   const [validations, setValidations] = useState({
     nom: false,
     email: false,
-    typePeau: false,
     password: {
       length: false,
       lowercase: false,
@@ -40,7 +37,7 @@ function Inscription() {
   const [touched, setTouched] = useState({
     nom: false,
     email: false,
-    typePeau: false,
+    telephone: false,
     password: false,
     confirmPassword: false,
   });
@@ -106,17 +103,6 @@ function Inscription() {
   }, [formData.email, touched.email]);
 
   useEffect(() => {
-    if (touched.typePeau) {
-      const isValid = formData.typePeau !== "";
-      setValidations(prev => ({ ...prev, typePeau: isValid }));
-      setErrors(prev => ({
-        ...prev,
-        typePeau: isValid ? "" : "Veuillez sélectionner votre type de peau"
-      }));
-    }
-  }, [formData.typePeau, touched.typePeau]);
-
-  useEffect(() => {
     if (touched.password) {
       const newValidations = {
         length: formData.password.length >= 8,
@@ -167,14 +153,14 @@ function Inscription() {
     const baseClass = "bg-white/10 border-b-2 border-white/20 text-white text-lg p-3 w-full focus:outline-none transition-all duration-300 placeholder-white/40";
 
     if (!touched[name]) {
-      return `${baseClass} focus:border-rose-300`;
+      return `${baseClass} focus:border-[#B17973]`;
     }
 
     if (errors[name]) {
       return `${baseClass} border-red-400 focus:border-red-400`;
     }
 
-    return `${baseClass} border-green-400 focus:border-green-400`;
+    return `${baseClass} border-[#B17973] focus:border-[#B17973]`;
   };
 
   const handleSubmit = async (e) => {
@@ -187,14 +173,12 @@ function Inscription() {
       email: formData.email,
       password: formData.password,
       password_confirmation: formData.confirmPassword,
-      telephone: formData.telephone,
-      skin_type: formData.typePeau
+      telephone: formData.telephone
     };
   
     console.log("Données envoyées:", userData); // Pour débogage
   
     try {
-      // Suppression de la variable response inutilisée
       await axios.post('http://localhost:8000/api/inscription/', userData, {
         headers: {
           'Content-Type': 'application/json'
@@ -204,17 +188,14 @@ function Inscription() {
     } catch (err) {
       console.error("Erreur complète:", err.response?.data);
       
-      // Meilleure gestion des erreurs
       let errorMessage = "Erreur lors de l'inscription";
       
       if (err.response?.data) {
-        // Traitement des différentes formes d'erreurs possibles
         if (typeof err.response.data === 'string') {
           errorMessage = err.response.data;
         } else if (err.response.data.detail) {
           errorMessage = err.response.data.detail;
         } else if (typeof err.response.data === 'object') {
-          // Prend le premier message d'erreur disponible
           const firstErrorKey = Object.keys(err.response.data)[0];
           if (firstErrorKey) {
             errorMessage = `${firstErrorKey}: ${err.response.data[firstErrorKey][0]}`;
@@ -231,7 +212,7 @@ function Inscription() {
   };
 
   return (
-    <div className="font-['Montserrat'] bg-gradient-to-b from-gray-900 to-purple-900">
+    <div className="font-['Montserrat'] bg-gradient-to-b from-[#5A4A42] to-[#8C6A5D]">
       <Navbar/>
       <div className="fixed inset-0 overflow-y-auto">
         <div className="flex min-h-screen items-center justify-center p-4 pt-24">
@@ -285,7 +266,7 @@ function Inscription() {
                               initial={{ scaleX: 0 }}
                               animate={{ scaleX: 1 }}
                               transition={{ delay: 1.2, duration: 1.2, ease: [0.2, 0.8, 0.2, 1] }}
-                              className="block w-1/4 h-1 bg-rose-400 mx-auto mt-4 origin-center"
+                              className="block w-1/4 h-1 bg-[#B17973] mx-auto mt-4 origin-center"
                             />
                           </motion.h3>
 
@@ -329,7 +310,7 @@ function Inscription() {
                                 className="flex items-center text-lg"
                               >
                                 <motion.div 
-                                  className="w-3 h-3 rounded-full bg-rose-400 mr-3"
+                                  className="w-3 h-3 rounded-full bg-[#B17973] mr-3"
                                   initial={{ scale: 0 }}
                                   animate={{ scale: 1 }}
                                   transition={{ delay: 1.4 + i * 0.2, type: "spring" }}
@@ -352,7 +333,7 @@ function Inscription() {
                       key={index}
                       onClick={() => setCurrentSlide(index)}
                       className={`w-2.5 h-2.5 rounded-full ${
-                        currentSlide === index ? 'bg-rose-400' : 'bg-white/30'
+                        currentSlide === index ? 'bg-[#B17973]' : 'bg-white/30'
                       }`}
                       initial={{ scale: 0.8 }}
                       animate={{ 
@@ -427,7 +408,7 @@ function Inscription() {
                     <motion.p 
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="mt-1 text-sm text-green-300 flex items-center"
+                      className="mt-1 text-sm text-[#B17973] flex items-center"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
@@ -469,7 +450,7 @@ function Inscription() {
                     <motion.p 
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="mt-1 text-sm text-green-300 flex items-center"
+                      className="mt-1 text-sm text-[#B17973] flex items-center"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
@@ -479,55 +460,25 @@ function Inscription() {
                   )}
                 </motion.div>
 
-                {/* Type de peau */}
+                {/* Téléphone */}
                 <motion.div 
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.65 }}
+                  transition={{ delay: 0.5 }}
                   className="space-y-2"
                 >
-                  <label className="block text-white text-lg font-medium">Type de peau</label>
-                  <select
-                    name="typePeau"
-                    value={formData.typePeau}
+                  <label className="block text-white text-lg font-medium">Téléphone</label>
+                  <input
+                    type="tel"
+                    name="telephone"
+                    value={formData.telephone}
                     onChange={handleInputChange}
                     onBlur={handleBlur}
-                    className={getInputClass("typePeau") + " cursor-pointer"}
-                  >
-                    <option value="">Sélectionnez votre type de peau</option>
-                    <option value="seche">Sèche</option>
-                    <option value="grasse">Grasse</option>
-                    <option value="mixte">Mixte</option>
-                    <option value="normale">Normale</option>
-                    <option value="sensible">Sensible</option>
-                  </select>
-                  {errors.typePeau && (
-                    <motion.p 
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="mt-1 text-sm text-red-300 flex items-center"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                      </svg>
-                      {errors.typePeau}
-                    </motion.p>
-                  )}
+                    className={getInputClass("telephone")}
+                    placeholder="Votre numéro de téléphone"
+                  />
                 </motion.div>
 
-                {/*Ajoutez le champ téléphone dans votre formulaire*/}
-<motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }} className="space-y-2">
-  <label className="block text-white text-lg font-medium">Téléphone</label>
-  <input
-    type="tel"
-    name="telephone"
-    value={formData.telephone}
-    onChange={handleInputChange}
-    onBlur={handleBlur}
-    className={getInputClass("telephone")}
-    placeholder="Votre numéro de téléphone"
-  />
-</motion.div>
                 {/* Mot de passe */}
                 <motion.div 
                   initial={{ opacity: 0, x: -20 }}
@@ -584,30 +535,30 @@ function Inscription() {
                 >
                   <h2 className="mb-2 text-sm font-semibold text-white/80 uppercase tracking-wider">Exigences du mot de passe:</h2>
                   <ul className="space-y-2 text-sm">
-                    <li className={`flex items-center ${validations.password.length ? 'text-green-300' : 'text-white/50'}`}>
-                      <span className={`inline-flex items-center justify-center w-5 h-5 mr-2 rounded-full ${validations.password.length ? 'bg-green-500/20' : 'bg-white/10'}`}>
+                    <li className={`flex items-center ${validations.password.length ? 'text-[#B17973]' : 'text-white/50'}`}>
+                      <span className={`inline-flex items-center justify-center w-5 h-5 mr-2 rounded-full ${validations.password.length ? 'bg-[#B17973]/20' : 'bg-white/10'}`}>
                         {validations.password.length ? (
-                          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-3 h-3" fill="#B17973" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
                         ) : null}
                       </span>
                       Au moins 8 caractères
                     </li>
-                    <li className={`flex items-center ${validations.password.lowercase ? 'text-green-300' : 'text-white/50'}`}>
-                      <span className={`inline-flex items-center justify-center w-5 h-5 mr-2 rounded-full ${validations.password.lowercase ? 'bg-green-500/20' : 'bg-white/10'}`}>
+                    <li className={`flex items-center ${validations.password.lowercase ? 'text-[#B17973]' : 'text-white/50'}`}>
+                      <span className={`inline-flex items-center justify-center w-5 h-5 mr-2 rounded-full ${validations.password.lowercase ? 'bg-[#B17973]/20' : 'bg-white/10'}`}>
                         {validations.password.lowercase ? (
-                          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-3 h-3" fill="#B17973" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
                         ) : null}
                       </span>
                       Au moins une lettre minuscule
                     </li>
-                    <li className={`flex items-center ${validations.password.specialChar ? 'text-green-300' : 'text-white/50'}`}>
-                      <span className={`inline-flex items-center justify-center w-5 h-5 mr-2 rounded-full ${validations.password.specialChar ? 'bg-green-500/20' : 'bg-white/10'}`}>
+                    <li className={`flex items-center ${validations.password.specialChar ? 'text-[#B17973]' : 'text-white/50'}`}>
+                      <span className={`inline-flex items-center justify-center w-5 h-5 mr-2 rounded-full ${validations.password.specialChar ? 'bg-[#B17973]/20' : 'bg-white/10'}`}>
                         {validations.password.specialChar ? (
-                          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-3 h-3" fill="#B17973" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
                         ) : null}
@@ -665,7 +616,7 @@ function Inscription() {
                     <motion.p 
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="mt-1 text-sm text-green-300 flex items-center"
+                      className="mt-1 text-sm text-[#B17973] flex items-center"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
@@ -687,7 +638,7 @@ function Inscription() {
                     whileHover={{ scale: isLoading ? 1 : 1.02 }}
                     whileTap={{ scale: isLoading ? 1 : 0.98 }}
                     disabled={isLoading}
-                    className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white p-4 rounded-lg hover:from-blue-700 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 shadow-lg font-bold text-lg relative"
+                    className="w-full bg-gradient-to-r from-[#B17973] to-[#8C6A5D] text-white p-4 rounded-lg hover:from-[#D7A8A2] hover:to-[#B17973] focus:outline-none focus:ring-2 focus:ring-[#B17973] focus:ring-offset-2 transition-all duration-300 shadow-lg font-bold text-lg relative"
                   >
                     {isLoading ? (
                       <div className="flex items-center justify-center">
@@ -713,7 +664,7 @@ function Inscription() {
                     Déjà un compte?{' '}
                     <Link
                       to="/connexion"
-                      className="font-medium text-blue-300 hover:text-blue-200 transition-colors"
+                      className="font-medium text-[#B17973] hover:text-[#D7A8A2] transition-colors"
                     >
                       Se connecter
                     </Link>
@@ -728,4 +679,6 @@ function Inscription() {
   );
 }
 
-export default Inscription;
+export default Inscription;console.log("Données envoyées:", userData); 
+console.error("Erreur complète:", err.response?.data);console.log("Données envoyées:", userData); // Pour débogage
+console.error("Erreur complète:", err.response?.data);

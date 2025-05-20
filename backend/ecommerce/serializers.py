@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
-from .models import Produit, Utilisateur, Commande, LigneCommande, ClientVendeur, Profile
+from .models import Produit, Utilisateur, Commande, LigneCommande, ClientVendeur, Profile,Administrateur 
 
 class InscriptionClientVendeurSerializer(serializers.ModelSerializer):
     password_confirmation = serializers.CharField(write_only=True, required=True)

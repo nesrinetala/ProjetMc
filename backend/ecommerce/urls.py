@@ -4,6 +4,8 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     # Authentification
@@ -16,10 +18,14 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
-    # Produits
-    path('produits/ajouter/', views.ajouter_produit, name='ajouter_produit'),
-    # Vous pouvez ajouter d'autres URLs pour les produits ici
-    # par exemple :
-    # path('produits/', views.liste_produits, name='liste_produits'),
-    # path('produits/<int:pk>/', views.detail_produit, name='detail_produit'),
+   
+
+    path('connexion/', views.connexion_utilisateur, name='connexion_utilisateur'),
+     path('dashbordadmin/', views.dashbordadmin, name='dashboard_admin'),
+
+
+
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
